@@ -68,6 +68,10 @@ const CoCreateLogic = {
 				var pass_id = tag.getAttribute('data-pass_id');
 				if (pass_id && pass_id == param_pass_to && param_document_id) {
 					_this.__setAttributeIntoEl(tag, param_document_id)
+					
+					if (tag.hasAttribute('name') && param_prefix) {
+						tag.setAttribute('name', param_prefix + tag.getAttribute('name'));
+					}
 				}
 			})
 			
@@ -271,6 +275,25 @@ const CoCreateLogic = {
 			if (aTag) _this.setLinkProcess(aTag);
 		})
 	},
+	
+	setDataPassValues(values) {
+		const valueParams = []
+		for ( let key in values) {
+		    valueParams.push({
+		    	pass_value_to: key,
+		    	value: values[key]
+		    })
+		}
+		
+		if (valueParams.length > 0) {
+			localStorage.setItem('valueParams', JSON.stringify(valueParams));
+		}
+	},
+	
+	initDataPassValues() {
+		localStorage.removeItem('valueParams');	
+	},
+
 	
 	initLink: function() {
 		var aTags = document.getElementsByTagName('a');
