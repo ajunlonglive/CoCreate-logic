@@ -386,7 +386,6 @@ const CoCreateLogic = {
 		}
 	},
 	
-
 	
 	__setGetValueProcess: function(id, value) {
 		
