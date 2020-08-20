@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+    <title>Attributes | CoCreate</title>
+    
+    <!-- CoCreateCSS -->
+    <link rel="stylesheet" href="https://cdn.cocreate.app/CoCreate.min.css" type="text/css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" crossorigin="anonymous" />    
+  </head>
+
+  <body>
+  
+      <div style="padding: 20px">
+        <form data-collection="modules" class="mbottom-75">
+    
+         <!-- usecase 1: process to get value-->
+         <input fetch-for data-test_1='{ "collection":"modules", "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }'
+         data-test_2='{ "collection":"modules", "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }'
+         type="text" data-collection="modules" data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123" >
+    
+         <!-- usecase 2: only name exists will get collcecton and document_id from element-->
+         <input fetch-for data-test_2='{ "name":"nameOtro123" }' 
+         type="text" data-collection="" data-realtime="true" data-document_id="" name="nameOtro123" data-pass_id="1234">
+    
+         <!-- usecase 3: only document_id and name exists will get collcecton from element-->
+          <textarea fetch-for data-test_3='{ "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }' 
+          data-collection="modules" data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123" rows="10"></textarea>
+         
+         <!-- usecase 4: only collection and name exists will get document_id from element-->
+          <textarea fetch-for data-test_4='{"name":"nameOtro123" }' 
+          data-collection="modules" data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123" rows="10"></textarea>
+         
+         <!-- usecase 5: using data-pass_id to get collcecton and document_id -->
+          <textarea fetch-for data-collection='{"data-pass_id":"1234", "name":"nameOtro123" }' data-pass_id="1234"
+           data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123" rows="10"></textarea>
+        </form>
+      </div>
+
+    <script>
+      var config = {
+        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+        securityKey: 'f26baf68-e3a9-45fc-effe-502e47116265',
+        organization_Id: '5de0387b12e200ea63204d6c'
+      }
+    </script>
+     
+    <script src="https://server.cocreate.app/js/CoCreate.min.js"></script>
+    <script src="https://cdn.cocreate.app/CoCreateUI.min.js"></script>
+
+  </body>
+</html>

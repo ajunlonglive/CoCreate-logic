@@ -152,6 +152,10 @@ const CoCreateLogic = {
 		var pass_fetch_name = aTag.getAttribute('data-pass_fetch_name')
 		var pass_fetcn_value = aTag.getAttribute('data-pass_fetch_value')
 		
+		if (aTag.hasAttribute('data-actions')) {
+			return;
+		}
+		
 		if (pass_to) {
 			var param = {
 				collection: collection,
@@ -231,15 +235,15 @@ const CoCreateLogic = {
 		  var input = inputs[i];
 		  
 		  if (!input.id) {
-		  	continue;
+			continue;
 		  }
 		  
 		  input.addEventListener('input', function(e) {
-		  	_this.__setGetValueProcess(this.id, this.value)
+			_this.__setGetValueProcess(this.id, this.value)
 		  })
 		  
 		  input.addEventListener('updated_by_fetch', function(e) {
-		  	_this.__setGetValueProcess(this.id, this.value);
+			_this.__setGetValueProcess(this.id, this.value);
 		  })
 		}
 	},
@@ -249,6 +253,10 @@ const CoCreateLogic = {
 		let _this = this;
 		valuePassBtn.addEventListener('click', function(e) {
 			let inputs = form.querySelectorAll('input, textarea, select');
+			
+			if (valuePassBtn.hasAttribute('data-actions')) {
+				return;
+			}
 			
 			let valueParams = [];
 			
@@ -279,10 +287,10 @@ const CoCreateLogic = {
 	setDataPassValues(values) {
 		const valueParams = []
 		for ( let key in values) {
-		    valueParams.push({
-		    	pass_value_to: key,
-		    	value: values[key]
-		    })
+			valueParams.push({
+				pass_value_to: key,
+				value: values[key]
+			})
 		}
 		
 		if (valueParams.length > 0) {
@@ -296,7 +304,7 @@ const CoCreateLogic = {
 
 	
 	initLink: function() {
-		var aTags = document.getElementsByTagName('a');
+		var aTags = document.getElementsByTagName('a, button');
 		for (var i = 0; i < aTags.length; i++) {
 			this.initATagEvent(aTags[i]);
 		}
@@ -313,24 +321,31 @@ const CoCreateLogic = {
 		  return;
 		}
 		
-	  if (href) {
+		
+		if (href) {
 			aTag.addEventListener('click', function(e) {
-			  e.preventDefault();
-			  if (!_this.passSubmitProcess(aTag)) {
-			  	return;
-			  }
-			  _this.storePassData(aTag);
+				e.preventDefault();
+				if (aTag.hasAttribute('data-actions')) {
+					return;
+				}
+				if (!_this.passSubmitProcess(aTag)) {
+					return;
+				}
+				_this.storePassData(aTag);
 				_this.openAnother(aTag);
 			})
 		} else {
-		  aTag.addEventListener('click', function(e) {
-		  	if (!_this.passSubmitProcess(aTag)) {
-		  		return;
-		  	}
-	  	  _this.storePassData(aTag);
-	  	  _this.initPassParams();
-	      CoCreate.fetchModules()
-	  	})
+			aTag.addEventListener('click', function(e) {
+				if (!_this.passSubmitProcess(aTag)) {
+					return;
+				}
+				if (aTag.hasAttribute('data-actions')) {
+					return;
+				}
+				_this.storePassData(aTag);
+				_this.initPassParams();
+				// CoCreate.fetchModules()
+			})
 		}
 	},
 	
@@ -351,6 +366,11 @@ const CoCreateLogic = {
 	
 	//. clickATaginButton
 	setLinkProcess: function(aTag) {
+		
+		if(aTag.hasAttribute('data-actions')) {
+			return;
+		}
+		
 		var href = aTag.getAttribute('href');
 		this.storePassData(aTag);
 		if (this.checkOpenCocreateModal(aTag)) {
@@ -361,15 +381,15 @@ const CoCreateLogic = {
 			this.openAnother(aTag);
 		} else {
 			this.initPassParams();
-		    //init();
-		    CoCreate.fetchModules()
+			//init();
+			// CoCreate.fetchModules()
 		}
 	},
 	
 	//. checkOpenCocreateModal
 	checkOpenCocreateModal: function(atag) {
 	  if (atag.getAttribute('target') === "modal") {
-	    return true;
+		return true;
 	  } 
 	  return false;
 	},
@@ -391,25 +411,25 @@ const CoCreateLogic = {
 		
 		if (!id) return;
   
-    var targets = document.querySelectorAll('[data-get_value="' + id + '"]');
-    
-    targets.forEach((target) => {
-      // target.value = value;
-      if (typeof(target.value) != "undefined") {
-      	target.value = value;
-      } else if (typeof(target.textContent) != "undefined") {
-      	target.textContent = value;
-      }
-      
-      updateFloatLabel(target);
-      
-      target.dispatchEvent(new Event("input", {"bubbles":true})); 
-      
-      if (target.classList.contains('searchInput')) {
-        let evt = new KeyboardEvent('keydown', {'keyCode': 13});
-        target.dispatchEvent(evt);
-      }
-    })
+	var targets = document.querySelectorAll('[data-get_value="' + id + '"]');
+	
+	targets.forEach((target) => {
+	  // target.value = value;
+	  if (typeof(target.value) != "undefined") {
+		target.value = value;
+	  } else if (typeof(target.textContent) != "undefined") {
+		target.textContent = value;
+	  }
+	  
+	  updateFloatLabel(target);
+	  
+	  target.dispatchEvent(new Event("input", {"bubbles":true})); 
+	  
+	  if (target.classList.contains('searchInput')) {
+		let evt = new KeyboardEvent('keydown', {'keyCode': 13});
+		target.dispatchEvent(evt);
+	  }
+	})
 	},
 	
 	__initPassItems: function(id, selector, noFetch) {
@@ -433,4 +453,167 @@ const CoCreateLogic = {
 	}
 }
 
+
+const CoCreateAttributes = {
+	//. key: colleciton.document_id.name,
+	//. example:  
+	/** modules.xxxxx.test: [
+	 *	{el: element, attr: 'data-test1'},
+	 *	{el: element, attr: 'data-test2'}
+	 * ]
+	 * 
+	 **/
+	mainInfo: {},
+	
+	init: function() {
+		// CoCreate.registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
+		this.initSocket();
+	},
+	
+	initSocket: function() {
+		const self = this;
+		CoCreateSocket.listen('updateDocument', function(data) {
+			self.renderAttribute(data)
+		})
+		
+		CoCreateSocket.listen('readDocument', function(data) {
+			self.renderAttribute(data)
+		})
+		
+		CoCreateSocket.listen('connect', function(data) {
+			// self.getRequest()
+			self.getRequest()
+		})
+	},
+	
+	runRequest: function(container) {
+		const requests = this.getRequest(container)
+
+		if (requests) {
+			
+			requests.forEach((req) => {
+				CoCreate.readDocument({
+					collection: req['collection'],
+					document_id: req['document_id']
+				})
+			})
+		}
+	},
+	
+	
+	getRequest: function(container) {
+		let fetch_container = container || document;
+		let elements = fetch_container.querySelectorAll('[fetch-for]');
+		let _this = this;
+
+		let requestData = [];
+		
+		if (elements.length === 0 && fetch_container != document && fetch_container.hasAttributes('fetch-for')) {
+			elements = [fetch_container];
+		}
+
+		elements.forEach((el) => {
+			//. check
+			const el_collection = el.getAttribute('data-collection')
+			const el_documentId = el.getAttribute('data-document_id')
+			const el_name = el.getAttribute('name')
+			
+			const attributes = el.attributes;
+			
+			for (let i = 0; i < attributes.length; i++) {
+				let jsonInfo = _this.jsonParse(attributes[i].value);
+				if (jsonInfo) {
+					let collection = jsonInfo['collection'] || el_collection;
+					let document_id = jsonInfo['document_id'] || el_documentId;
+					let name = jsonInfo['name'] || el_name;
+					
+					if (jsonInfo['data-pass_id']) {
+						let pass_info = _this.checkPassId(jsonInfo['data-pass_id']);
+						if (pass_info) {
+							collection = pass_info.collection;
+							document_id = pass_info.document_id;
+						} else {
+							collection = null;
+							document_id = null;
+						}
+					}
+
+					const key = _this.makeKey(collection, document_id, name);
+					
+					if (collection && document_id && name) {
+						if (!_this.mainInfo[key]) {
+							_this.mainInfo[key] = [];
+						}
+						_this.mainInfo[key].push({el: el, attr: attributes[i].name})
+						
+						if (!requestData.some((d) => d['collection'] === collection && d['document_id'] === document_id)) {
+							requestData.push({collection, document_id})
+						}
+					}
+				}
+			}
+		})
+		return requestData;
+	},
+	
+	renderAttribute: function(data) {
+		const collection = data['collection'];
+		const document_id = data['document_id'];
+		
+		for (let name in data.data) {
+			const key = this.makeKey(collection, document_id, name) 
+			const value = data.data[name];
+			if (this.mainInfo[key]) {
+				this.mainInfo[key].forEach((item) => {
+					item.el.setAttribute(item.attr, value);
+					
+					// if (item.attr == 'data-collection') {
+					// 	CoCreate.runInitModule('cocreate-text');						
+					// } 
+				})
+			}
+		}
+	},
+	
+	jsonParse: function(str_data) {
+		try {
+			let json_data = JSON.parse(str_data);
+			if (typeof json_data === 'object' && json_data != null) {
+				return json_data;
+			} else {
+				return null;
+			}
+		} catch (e) {
+			return null;
+		}
+	},
+	
+	checkPassId: function(pass_id) {
+		var dataParams = localStorage.getItem('dataParams');
+		dataParams = JSON.parse(dataParams);
+
+		if (!dataParams || dataParams.length == 0) return null;
+
+		for (var i = 0; i < dataParams.length; i++) {
+			if (dataParams[i].pass_to == pass_id) {
+				return {
+					collection: dataParams[i].collection, 
+					document_id: dataParams[i].document_id
+				};
+			}
+		}
+		return null;
+	},
+	
+	makeKey: function (collection, document_id, name) {
+		return `${collection}_${document_id}_${name}`;
+	},
+
+	
+	
+}
+
+
+CoCreateAttributes.init();
 CoCreateLogic.init();
+CoCreateInit.register('CoCreateAttributes', CoCreateAttributes, CoCreateAttributes.runRequest);

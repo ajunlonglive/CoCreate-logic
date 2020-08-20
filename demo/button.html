@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Link</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <link rel="stylesheet" href="https://cdn.cocreate.app/CoCreate.min.css" type="text/css" />
+<!-- DHTMLX Window -->
+  <link rel="stylesheet" href="https://cdn.dhtmlx.com/edge/dhtmlx.css" type="text/css"> 
+  <script src="https://cdn.dhtmlx.com/edge/dhtmlx.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+	<!-- windows -->
+	<button target="modal" href="./documentation" data-pass_collection="modules" data-pass_document_id="" data-pass_to="me1234" data-modal_ajax="false" data-modal_width="600px" data-modal_height="100%" data-modal_color="#333">Window test.1</button>
+	<button target="modal" href="render.html" data-pass_collection="module_activity" data-pass_document_id="5cd910dd30f02f16b3385821" data-pass_to="me1234" data-modal_height="100%"  data-modal_color="red" data-modal_x="20" data-modal_y="40">Window test.2</button>				
+  <!--Page-->
+	<button>
+	  <a href="render.html" target="" data-pass_collection="module_activity" data-pass_document_id="5d8aa1cfa37aee309596d6c6" data-pass_to="me1234">Page test.1.html
+	    <div data-pass_to="me12345" data-pass_collection="modules" data-pass_document_id="5d8aa2fca37aee309596d6c8"></div>
+	  </a>
+	  </button>
+	----
+	<button>
+		<a href="CoCreate-kanban/simple-test.html" 
+			data-pass_collection="module_activity" 
+			data-pass_fetch_name="stage"
+			data-pass_to="stage">Fetch name</a>
+	</button>
+
+	<button>
+		<a href="CoCreate-kanban/kanban.html" 
+			data-pass_collection="module_activity" 
+			data-pass_fetch_value="5e6d79f9d8cdbe53927a0443"
+			data-pass_fetch_name="module_id"
+			data-pass_to="fetch_value">Simple Test</a>
+	</button>
+	
+	<button><a href="https://server.cocreate.app/CoCreate-attributes/CoCreate-attibutes.html" target="_blank" data-pass_collection="modules" data-pass_document_id="5ebc16fc8917bc59483a7e3b"  data-pass_to="1234">empty target</a></button>
+	
+	
+	<button><a href="CoCreate-attributes/CoCreate-attibutes.html" data-actions="01, 02" target="_blank" data-pass_collection="modules" data-pass_document_id="5ebc16fc8917bc59483a7e3b"  data-pass_to="1234">_blank</a></button>
+	<button><a href="CoCreate-attributes/CoCreate-attibutes.html"  target="_blank" data-pass_collection="modules" data-pass_document_id="5d8aa2fca37aee309596d6c8" data-pass_to="1234">_window</a></button>
+	<button><a href="target.html"  target="_self" data-pass_collection="modules" data-pass_document_id="5d8aa2fca37aee309596d6c8" data-pass_to="me1234">_self</a></button>
+	----
+	<button><a href="html_block.html"  data-pass_collection="modules" data-pass_document_id='5cf995e8ac959a2bd93356fb' data-pass_prefix="" data-pass_to="me1234">Page HTML BLOCK</a></button>
+	<button><a target="modal" href="html_block.html"  data-pass_collection="modules" data-pass_document_id='5cf995e8ac959a2bd93356fb' data-pass_prefix="" data-pass_to="me1234">Modal HTML BLOCK</a></button>
+	
+	<button><a href="CoCreate-builder/index.html" data-pass_collection='test1_collection' data-pass_prefix="test-prefix_" data-pass_to="me1234">test page builder.html</a></button>
+	<button><a target="modal" href='builder.html' data-pass_collection='modules' data-pass_document_id='5cf995e8ac959a2bd93356fb' data-pass_prefix="form_" data-pass_to="me1234">modal builder.html</a></button>
+	
+	<button><a target="modal" href='module_datatable.html' data-pass_collection='modules' data-pass_document_id='5cf995e8ac959a2bd93356fb' data-pass_prefix="form_" data-pass_to="me1234">modal datatable</a></button>
+	
+	<button><a target="modal" href='index.html' data-pass_to="me1234" data-modal_ajax="true">index.html</a></button>
+
+	
+	<div id="modal-viewport" ></div>
+	
+  <script>
+    var config = {
+      isParent: true,
+      apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+      securityKey: 'f26baf68-e3a9-45fc-effe-502e47116265',
+      organization_Id: '5de0387b12e200ea63204d6c'
+    }
+  </script>
+  
+  <!--CoCreateJS-->
+  <!--<script src="https://server.cocreate.app/js/CoCreate.min.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-plugins/CoCreate-modal/src/CoCreate-modal.js"></script>-->
+  
+  <!--CoCreateJS-->
+  <script src="https://server.cocreate.app/js/CoCreate.min.js"></script>
+
+
+  <!--<script src="https://server.cocreate.app/CoCreateJS/src/CoCreate-socket.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-logic/CoCreate-logic.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreateJS/src/CoCreate-utils.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-init/CoCreate-init.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreateJS/src/CoCreate.js"></script>-->
+
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-y/y-client/dist/CoCreate-crdt.js"></script>-->
+
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-document_id/CoCreate-document_id.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-form/CoCreate-form.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-filter/CoCreate-filter.js"></script> -->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-templating/CoCreate-templating.js"></script>-->
+  
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-savefetch/CoCreate-savefetch.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-clone/CoCreate-clone.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-dom/CoCreate-dom.js"></script>-->
+  
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-htmltags/CoCreate-htmltags.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-input/CoCreate-input.js"></script>-->
+
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-cursors/CoCreate-cursors.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-text/CoCreate-text.js"></script>-->
+
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-select/src/CoCreate-select.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-calculations/CoCreate-calculations.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-contenteditable/CoCreate-contenteditable.js"></script>-->
+  <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-modal/src/CoCreate-modal.js"></script>-->
+
+   
+
+  <script src="https://server.cocreate.app/js/CoCreateUI.min.js"></script>
+
+  <script type="text/javascript" src="https://server.cocreate.app/CoCreate-components/CoCreate-y/quill/dist/CoCreate-quill.js" async></script>
+  <script type="text/javascript" src="https://server.cocreate.app/CoCreate-components/CoCreate-y/codemirror/dist/CoCreate-codemirror.js" async></script>
+  
+
+</body>
+</html>
