@@ -2,18 +2,17 @@
 const CoCreateLogic = {
 	
 	init: function() {
-		this.initKeys();
-		this.initPassSessionIds();
-		this.initPassParams();
-		this.initPassValueParams();
-		this.initValuePassBtns();
-		this.initGetValueInput();
-		
-		this.initLink();
+		this.__initKeys();
+		this.__initPassSessionIds();
+		this.__initPassParams();
+		this.__initPassValueParams();
+		this.__initValuePassBtns();
+		this.__initGetValueInput();
+		this.initAtagElement();
 	},
 		
 	// getKeys
-	initKeys: function() {
+	__initKeys: function() {
 		if (localStorage.getItem('apiKey')) {
 			config.apiKey = localStorage.getItem('apiKey');
 		}
@@ -26,7 +25,7 @@ const CoCreateLogic = {
 	},
 	
 	//. passSessionIds
-	initPassSessionIds: function() {
+	__initPassSessionIds: function() {
 		let orgId = localStorage.getItem('organization_id');
 		let user_id = localStorage.getItem('user_id');
 		let adminUI_id = localStorage.getItem('adminUI_id');
@@ -38,18 +37,89 @@ const CoCreateLogic = {
 		this.__initPassItems(builderUI_id,".sessionBuilderUI_Id");
 	},
 	
+	initElement: function(container) {
+		const self = this;
+		let mainContainer = container || document;
+		if (!mainContainer.querySelectorAll) {
+			return;
+		}
+		let elements = mainContainer.querySelectorAll('[data-pass_id]');
+		elements = Array.from(elements);
+		if (mainContainer != document && mainContainer.hasAttribute('data-pass_id')) {
+			elements.push(mainContainer)
+		}
+		let dataParams = localStorage.getItem('dataParams');
+		dataParams = JSON.parse(dataParams);
+		
+		elements.forEach((el) => {
+			if (CoCreateInit.getInitialized(el)) {
+				return;
+			}
+			
+			const pass_id = el.getAttribute('data-pass_id')
+			const paramObj = dataParams.find(x => x.pass_to == pass_id)
+			if (!paramObj) return;
+
+			const {collection, document_id, pass_to, prefix} = paramObj;
+			CoCreateInit.setInitialized(el)
+			
+			if (el.tagName === "FORM" && !el.getAttribute('data-colleciton') && collection) {
+				el.setAttribute('data-colleciton', collection);
+			}
+			self.__setPassAttributes(el, paramObj);
+
+
+		});
+	},
+	
+	initAtagElement: function() {
+		const self = this;
+		document.addEventListener('click', function(event) {
+			const target = event.target.closest('a, button')
+			if (!target)  return;
+			
+			if (target.getAttribute('target') === 'modal' && target.getAttribute('data-pass_to')) {
+				event.preventDefault();
+				// event.stopImmediatePropagation()
+				self.setLinkProcess(target);
+				return;
+			}
+			
+			const href = target.getAttribute('href');
+			if (target.getAttribute('target') !== 'modal') {
+				if (target.hasAttribute('data-actions')) return;
+				if (!self.passSubmitProcess(target)) return;
+				const pass_to = target.getAttribute('data-pass_to');
+				if (href) {
+					event.preventDefault();
+					self.storePassData(target)
+					self.openAnother(target)
+				} else {
+					self.storePassData(target)
+					self.__initPassParams(pass_to);
+				}
+			}
+			
+		})
+	},
+	
 	//. passParams
-	initPassParams: function() {
+	__initPassParams: function(pass_to) {
 		var dataParams = localStorage.getItem('dataParams');
 		dataParams = JSON.parse(dataParams);
 
 		if (!dataParams || dataParams.length == 0) return;
-		let _this = this;		
+		let self = this;
+		
 		dataParams.forEach(function(dataParam) {
 			var param_collection = dataParam.collection;
 			var param_document_id = dataParam.document_id;
 			var param_prefix = dataParam.prefix;
 			var param_pass_to = dataParam.pass_to;
+			
+			if (pass_to && param_pass_to != pass_to) {
+				return;
+			}
 			
 			var forms = document.querySelectorAll('form');
 			
@@ -62,65 +132,27 @@ const CoCreateLogic = {
 				}
 			})
 
-			var allTags = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, i, q, a, b, li, ul, span, code, img, head, body, input, textarea, select, table, div, html');
+			var allTags = document.querySelectorAll('[data-pass_id]');
 			
 			allTags.forEach((tag) => {
 				var pass_id = tag.getAttribute('data-pass_id');
 				if (pass_id && pass_id == param_pass_to && param_document_id) {
-					_this.__setAttributeIntoEl(tag, param_document_id)
-					
-					if (tag.hasAttribute('name') && param_prefix) {
-						tag.setAttribute('name', param_prefix + tag.getAttribute('name'));
-					}
+					self.__setPassAttributes(tag, dataParam)
 				}
 			})
 			
-			var displayList = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, i, q, a, b, li, ul, span, code, img, head, body, table, html, div');
+			// var displayList = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, i, q, a, b, li, ul, span, code, img, head, body, table, tbody, html, div, iframe');
 			
-			displayList.forEach((display) => {
-				var pass_id = display.getAttribute('data-pass_id');
-			
-				if (pass_id && pass_id == param_pass_to) {
-					// if (!display.getAttribute('data-fetch_value')) {
-					// 	display.setAttribute('data-fetch_value', param_document_id);
-					// }
-					
-					if (display.classList.contains('template-wrapper')) {
-						if (dataParam.fetch_name) {
-							display.setAttribute('data-fetch_name', dataParam.fetch_name);
-						}
-						
-						if (dataParam.fetch_value) {
-							display.setAttribute('data-fetch_value', dataParam.fetch_value);
-						}
-					}
-
-					if (param_collection && param_collection != "") {
-						if (!display.getAttribute('data-collection')) {
-							display.setAttribute('data-collection', param_collection);    
-						}
-						
-						if (!display.getAttribute('data-pass_collection')) {
-							display.setAttribute('data-pass_collection', param_collection);
-						}
-						
-						if (!display.getAttribute('data-fetch_collection')) {
-							display.setAttribute('data-fetch_collection', param_collection);
-						}
-						
-					}
-					
-					if (param_prefix) {
-						display.setAttribute('prefix', param_prefix);
-						display.setAttribute('data-pass_prefix', param_prefix);  
-					}
-				}    	
-			}) 
+			// displayList.forEach((display) => {
+			// 	if (display.getAttribute('data-pass_id')) {
+			// 		self.__setPassAttributes(display, dataParam)
+			// 	}    	
+			// }) 
 		})		
 	},
 	
 	// passValueParams
-	initPassValueParams: function(contianer) {
+	__initPassValueParams: function(contianer) {
 		var valueParams = localStorage.getItem('valueParams');
 		valueParams = JSON.parse(valueParams);
 		
@@ -128,94 +160,112 @@ const CoCreateLogic = {
 		
 		valueParams.forEach(function(valueParam) {
 			var pass_value_to = valueParam.pass_value_to;
-			var inputs = (contianer || document).querySelectorAll('input, textarea, select');
+			// var inputs = (contianer || document).querySelectorAll('input, textarea, select');
+			var inputs = (contianer || document).querySelectorAll('[data-pass_value_id]');
 			
 			inputs.forEach((input) => {
 				let pass_value_id = input.getAttribute('data-pass_value_id');
 				
 				if (pass_value_id && pass_value_id == pass_value_to) {
-					input.value = valueParam.value;
-					updateFloatLabel(input);
+					if (['INPUT', 'TEXTAREA', 'SELECT'].includes(input.tagName)) {
+						input.value = valueParam.value;
+						if (CoCreateFloatLabel) CoCreateFloatLabel.update(input)
+					} else {
+						input.innerHTML = valueParam.value;
+					}
 				}	    	
 			})
 		})		
 	},
 	
+	__getPassAttributes: function (element) {
+		return {
+			collection : element.getAttribute('data-pass_collection'),
+			document_id : element.getAttribute('data-pass_document_id'),
+			name : element.getAttribute('data-pass_name'),
+			pass_to: element.getAttribute('data-pass_to'),
+			filter_name: element.getAttribute('data-pass_filter_name'),
+			filter_value: element.getAttribute('data-pass_filter_value'),
+			prefix: element.getAttribute('data-pass_prefix') || ""
+		}	
+	},
+	
+	__setPassAttributes: function(el, param) {
+		const {collection, document_id, name, pass_to, filter_name, filter_value, prefix} = param;
+		const pass_id = el.getAttribute('data-pass_id')
+		if (pass_id != pass_to) return ;
+		
+		if (collection) {
+			if (!el.hasAttribute('data-fetch_collection') && !el.getAttribute("data-collection")) 
+				el.setAttribute('data-collection', collection);
+			if (el.getAttribute('data-pass_fetch_collection') == "") 
+				el.setAttribute('data-pass_fetch_collection', collection);
+			if (el.getAttribute('data-fetch_collection') == "") 
+				el.setAttribute('data-fetch_collection', collection);
+		}
+		
+		if (document_id) {
+			if (!el.hasAttribute('data-fetch_collection') && !el.getAttribute("data-document_id")) 
+				el.setAttribute('data-document_id', document_id);
+			if (el.getAttribute('data-fetch_document_id') == "") 
+				el.setAttribute('data-fetch_document_id', document_id);
+			if (el.getAttribute('data-pass_fetch_document_id') == "") 
+				el.setAttribute('data-pass_fetch_document_id', document_id);
+		}
+		
+		if (name) {
+			if (!el.hasAttribute('data-fetch_collection') && !el.getAttribute("name"))
+				el.setAttribute('name', name);
+			if (el.getAttribute('data-fetch_name') == "") 
+				el.setAttribute('data-fetch_name', name);
+		}
+		
+		if (prefix) {
+			if (el.hasAttribute('name')) 
+				el.setAttribute('name', prefix + el.getAttribute('name'));
+			if (el.hasAttribute('data-fetch_name')) 
+				el.setAttribute('data-fetch_name', prefix + el.getAttribute('data-fetch_name'));
+		}
+		
+		if (filter_name) {
+			if (el.getAttribute('data-filter_name') == "") 
+				el.setAttribute('data-filter_name', filter_name);
+		}
+		
+		if (filter_value) {
+			if (el.getAttribute('data-filter_value') == "") 
+				el.setAttribute('data-filter_value', filter_value);
+		}
+	},
+	
 	//. storePassData
 	storePassData: function(aTag) {
-		var dataParams = [];
-				
-		var collection = aTag.getAttribute('data-pass_collection');
-		var document_id = aTag.getAttribute('data-pass_document_id');
-		var prefix = aTag.getAttribute('data-pass_prefix');
-		var pass_to = aTag.getAttribute('data-pass_to');
-		var pass_fetch_name = aTag.getAttribute('data-pass_fetch_name')
-		var pass_fetcn_value = aTag.getAttribute('data-pass_fetch_value')
+		let dataParams = [];
+		const self = this;
+		let param = this.__getPassAttributes(aTag);
 		
 		if (aTag.hasAttribute('data-actions')) {
 			return;
 		}
 		
-		if (pass_to) {
-			var param = {
-				collection: collection,
-				document_id: document_id,
-				prefix: prefix,
-				pass_to: pass_to,
-				fetch_name: pass_fetch_name,
-				fetch_value: pass_fetcn_value
-			};
-		
+		if (param.pass_to) {
 			dataParams.push(param);
-			this.initTemplateByPass(pass_to, param);
 		}
 		
-		var tags = aTag.querySelectorAll('[data-pass_to]');
-		
+		let tags = aTag.querySelectorAll('[data-pass_to]');
+
 		tags.forEach((tag) => {
-			const collection = tag.getAttribute('data-pass_collection');
-			const document_id = tag.getAttribute('data-pass_document_id');
-			const prefix = tag.getAttribute('data-pass_prefix');
-			const pass_to = tag.getAttribute('data-pass_to');
-			const pass_fetch_name = aTag.getAttribute('data-pass_fetch_name')
-			const pass_fetcn_value = aTag.getAttribute('data-pass_fetch_value')
-			
-			if (pass_to) {
-				var param = {
-					collection: collection,
-					document_id: document_id,
-					prefix: prefix,
-					pass_to: pass_to,
-					fetch_name: pass_fetch_name,
-					fetch_value: pass_fetcn_value
-				};
-			
-				dataParams.push(param);
+			let passParam = self.__getPassAttributes(tag)
+			if (passParam.pass_to) {
+				dataParams.push(passParam);
 			}			
 		})
-
 		if (dataParams.length > 0) localStorage.setItem('dataParams', JSON.stringify(dataParams));
 	},
 	
-	//. initTemplateByPass
-	initTemplateByPass: function(pass_id, param) {
-		let templates = document.querySelectorAll('.template-wrapper[data-pass_id="' + pass_id + '"]')
 
-		for(var  i = 0; i < templates.length; i++) {
-			let tmp = templates[i];
-			tmp.setAttribute('data-fetch_collection', param.collection);
-			if (param.fetch_name) {
-				tmp.setAttribute('data-fetch_name', param.fetch_name)
-			}
-			if (param.fetch_value) {
-				tmp.setAttribute('data-fetch_value', param.fetch_value)
-			}
-			initTemplateByElement(tmp, true);
-		}
-	},
-	
 	//. initValuePassBtns
-	initValuePassBtns: function() {
+	__initValuePassBtns: function() {
 		let forms = document.getElementsByTagName('form');
 	
 		for (let i=0; i < forms.length; i++) {
@@ -227,9 +277,9 @@ const CoCreateLogic = {
 		}
 	},
 	
-	initGetValueInput: function() {
+	__initGetValueInput: function() {
 		var inputs = document.querySelectorAll('input, textarea');
-		let _this = this;
+		let self = this;
 		
 		for (var i = 0; i < inputs.length; i++) {
 		  var input = inputs[i];
@@ -239,18 +289,19 @@ const CoCreateLogic = {
 		  }
 		  
 		  input.addEventListener('input', function(e) {
-			_this.__setGetValueProcess(this.id, this.value)
+			self.__setGetValueProcess(this.id, this.value)
 		  })
 		  
 		  input.addEventListener('updated_by_fetch', function(e) {
-			_this.__setGetValueProcess(this.id, this.value);
+			self.__setGetValueProcess(this.id, this.value);
 		  })
 		}
 	},
 	
 	//. initValuePassBtn
 	__registerValuePassBtnEvent: function(form, valuePassBtn) {
-		let _this = this;
+		let self = this;
+		return;
 		valuePassBtn.addEventListener('click', function(e) {
 			let inputs = form.querySelectorAll('input, textarea, select');
 			
@@ -276,15 +327,15 @@ const CoCreateLogic = {
 			
 			if (valueParams.length > 0) localStorage.setItem('valueParams', JSON.stringify(valueParams));
 			
-			_this.initPassValueParams();
+			self.__initPassValueParams();
 			
 			let aTag = valuePassBtn.querySelector('a');
 			
-			if (aTag) _this.setLinkProcess(aTag);
+			if (aTag) self.setLinkProcess(aTag);
 		})
 	},
 	
-	setDataPassValues(values) {
+	setDataPassValues: function(values) {
 		const valueParams = []
 		for ( let key in values) {
 			valueParams.push({
@@ -298,57 +349,10 @@ const CoCreateLogic = {
 		}
 	},
 	
-	initDataPassValues() {
+	initDataPassValues: function() {
 		localStorage.removeItem('valueParams');	
 	},
 
-	
-	initLink: function() {
-		var aTags = document.getElementsByTagName('a, button');
-		for (var i = 0; i < aTags.length; i++) {
-			this.initATagEvent(aTags[i]);
-		}
-	},
-	
-	//. initATag
-	initATagEvent: function(aTag) {
-
-		var href = aTag.getAttribute('href');
-		var isModal = this.checkOpenCocreateModal(aTag);
-		let _this = this;
-
-		if (isModal) {
-		  return;
-		}
-		
-		
-		if (href) {
-			aTag.addEventListener('click', function(e) {
-				e.preventDefault();
-				if (aTag.hasAttribute('data-actions')) {
-					return;
-				}
-				if (!_this.passSubmitProcess(aTag)) {
-					return;
-				}
-				_this.storePassData(aTag);
-				_this.openAnother(aTag);
-			})
-		} else {
-			aTag.addEventListener('click', function(e) {
-				if (!_this.passSubmitProcess(aTag)) {
-					return;
-				}
-				if (aTag.hasAttribute('data-actions')) {
-					return;
-				}
-				_this.storePassData(aTag);
-				_this.initPassParams();
-				// CoCreate.fetchModules()
-			})
-		}
-	},
-	
 	//. openAnother
 	openAnother: function(atag) {
 
@@ -370,8 +374,8 @@ const CoCreateLogic = {
 		if(aTag.hasAttribute('data-actions')) {
 			return;
 		}
-		
-		var href = aTag.getAttribute('href');
+		const pass_to = aTag.getAttribute('data-pass_to');
+		const href = aTag.getAttribute('href');
 		this.storePassData(aTag);
 		if (this.checkOpenCocreateModal(aTag)) {
 			if (g_cocreateWindow) {
@@ -379,14 +383,11 @@ const CoCreateLogic = {
 			}
 		} else if (href) {
 			this.openAnother(aTag);
-		} else {
-			this.initPassParams();
-			//init();
-			// CoCreate.fetchModules()
+		} else if (pass_to) {
+			this.__initPassParams(pass_to);
 		}
 	},
 	
-	//. checkOpenCocreateModal
 	checkOpenCocreateModal: function(atag) {
 	  if (atag.getAttribute('target') === "modal") {
 		return true;
@@ -411,46 +412,36 @@ const CoCreateLogic = {
 		
 		if (!id) return;
   
-	var targets = document.querySelectorAll('[data-get_value="' + id + '"]');
-	
-	targets.forEach((target) => {
-	  // target.value = value;
-	  if (typeof(target.value) != "undefined") {
-		target.value = value;
-	  } else if (typeof(target.textContent) != "undefined") {
-		target.textContent = value;
-	  }
-	  
-	  updateFloatLabel(target);
-	  
-	  target.dispatchEvent(new Event("input", {"bubbles":true})); 
-	  
-	  if (target.classList.contains('searchInput')) {
-		let evt = new KeyboardEvent('keydown', {'keyCode': 13});
-		target.dispatchEvent(evt);
-	  }
-	})
+		var targets = document.querySelectorAll('[data-get_value="' + id + '"]');
+		
+		targets.forEach((target) => {
+		  // target.value = value;
+		  if (typeof(target.value) != "undefined") {
+			target.value = value;
+		  } else if (typeof(target.textContent) != "undefined") {
+			target.textContent = value;
+		  }
+		  
+		  if (CoCreateFloatLabel) CoCreateFloatLabel.update(target)
+		  
+		  target.dispatchEvent(new Event("input", {"bubbles":true})); 
+		  
+		  if (target.classList.contains('searchInput')) {
+			let evt = new KeyboardEvent('keydown', {'keyCode': 13});
+			target.dispatchEvent(evt);
+		  }
+		})
 	},
 	
 	__initPassItems: function(id, selector, noFetch) {
-		const _this = this;
+		const self = this;
 		if (id) {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
-				_this.__setAttributeIntoEl(el, id, noFetch);
+				el.setAttribute('data-document_id', id, noFetch);
 			})
 		}
 	},
-	
-	__setAttributeIntoEl: function(el, id, noFetch) {
-		
-		el.setAttribute('data-document_id', id);
-		if (noFetch) {
-			el.setAttribute('data-fetch_document_id', id);
-		}
-		// el.setAttribute('data-fetch_value', id);
-		el.setAttribute('data-pass_document_id', id);
-	}
 }
 
 
@@ -467,27 +458,23 @@ const CoCreateAttributes = {
 	
 	init: function() {
 		// CoCreate.registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
-		this.initSocket();
-	},
-	
-	initSocket: function() {
 		const self = this;
 		CoCreateSocket.listen('updateDocument', function(data) {
-			self.renderAttribute(data)
+			self.render(data)
 		})
 		
 		CoCreateSocket.listen('readDocument', function(data) {
-			self.renderAttribute(data)
+			self.render(data)
 		})
 		
 		CoCreateSocket.listen('connect', function(data) {
 			// self.getRequest()
-			self.getRequest()
+			self.__getRequest()
 		})
 	},
-	
-	runRequest: function(container) {
-		const requests = this.getRequest(container)
+
+	initElement: function(container) {
+		const requests = this.__getRequest(container)
 
 		if (requests) {
 			
@@ -499,12 +486,39 @@ const CoCreateAttributes = {
 			})
 		}
 	},
+
+	render: function(data) {
+		const collection = data['collection'];
+		const document_id = data['document_id'];
+		
+		for (let name in data.data) {
+			const key = this.__makeKey(collection, document_id, name) 
+			const value = data.data[name];
+			if (this.mainInfo[key]) {
+				this.mainInfo[key].forEach((item) => {
+					item.el.setAttribute(item.attr, value);
+					
+					// if (item.attr == 'data-collection') {
+					// 	CoCreate.runInitModule('cocreate-text');						
+					// } 
+					
+					item.el.dispatchEvent(new CustomEvent('CoCreateAttribute-run', {
+						eventType: 'rendered',
+						item: item.el
+					}))
+				})
+			}
+		}
+	},
 	
+	setValue: function(element, data) {
+		
+	},
 	
-	getRequest: function(container) {
+	__getRequest: function(container) {
 		let fetch_container = container || document;
 		let elements = fetch_container.querySelectorAll('[fetch-for]');
-		let _this = this;
+		let self = this;
 
 		let requestData = [];
 		
@@ -521,14 +535,14 @@ const CoCreateAttributes = {
 			const attributes = el.attributes;
 			
 			for (let i = 0; i < attributes.length; i++) {
-				let jsonInfo = _this.jsonParse(attributes[i].value);
+				let jsonInfo = self.__jsonParse(attributes[i].value);
 				if (jsonInfo) {
 					let collection = jsonInfo['collection'] || el_collection;
 					let document_id = jsonInfo['document_id'] || el_documentId;
 					let name = jsonInfo['name'] || el_name;
 					
 					if (jsonInfo['data-pass_id']) {
-						let pass_info = _this.checkPassId(jsonInfo['data-pass_id']);
+						let pass_info = self.__checkPassId(jsonInfo['data-pass_id']);
 						if (pass_info) {
 							collection = pass_info.collection;
 							document_id = pass_info.document_id;
@@ -538,13 +552,13 @@ const CoCreateAttributes = {
 						}
 					}
 
-					const key = _this.makeKey(collection, document_id, name);
+					const key = self.__makeKey(collection, document_id, name);
 					
 					if (collection && document_id && name) {
-						if (!_this.mainInfo[key]) {
-							_this.mainInfo[key] = [];
+						if (!self.mainInfo[key]) {
+							self.mainInfo[key] = [];
 						}
-						_this.mainInfo[key].push({el: el, attr: attributes[i].name})
+						self.mainInfo[key].push({el: el, attr: attributes[i].name})
 						
 						if (!requestData.some((d) => d['collection'] === collection && d['document_id'] === document_id)) {
 							requestData.push({collection, document_id})
@@ -556,26 +570,7 @@ const CoCreateAttributes = {
 		return requestData;
 	},
 	
-	renderAttribute: function(data) {
-		const collection = data['collection'];
-		const document_id = data['document_id'];
-		
-		for (let name in data.data) {
-			const key = this.makeKey(collection, document_id, name) 
-			const value = data.data[name];
-			if (this.mainInfo[key]) {
-				this.mainInfo[key].forEach((item) => {
-					item.el.setAttribute(item.attr, value);
-					
-					// if (item.attr == 'data-collection') {
-					// 	CoCreate.runInitModule('cocreate-text');						
-					// } 
-				})
-			}
-		}
-	},
-	
-	jsonParse: function(str_data) {
+	__jsonParse: function(str_data) {
 		try {
 			let json_data = JSON.parse(str_data);
 			if (typeof json_data === 'object' && json_data != null) {
@@ -588,7 +583,7 @@ const CoCreateAttributes = {
 		}
 	},
 	
-	checkPassId: function(pass_id) {
+	__checkPassId: function(pass_id) {
 		var dataParams = localStorage.getItem('dataParams');
 		dataParams = JSON.parse(dataParams);
 
@@ -605,15 +600,14 @@ const CoCreateAttributes = {
 		return null;
 	},
 	
-	makeKey: function (collection, document_id, name) {
+	__makeKey: function (collection, document_id, name) {
 		return `${collection}_${document_id}_${name}`;
 	},
-
-	
-	
 }
 
 
 CoCreateAttributes.init();
 CoCreateLogic.init();
-CoCreateInit.register('CoCreateAttributes', CoCreateAttributes, CoCreateAttributes.runRequest);
+CoCreateInit.register('CoCreateAttributes', CoCreateAttributes, CoCreateAttributes.initElement);
+CoCreateInit.register('CoCreateLogic', CoCreateLogic, CoCreateLogic.initElement);
+
