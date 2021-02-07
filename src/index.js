@@ -1,5 +1,7 @@
+import CoCreateAttributes from "./attributes.js"
 
 const CoCreateLogic = {
+	attributes: CoCreateAttributes,
 	
 	init: function() {
 		this.__initKeys();
@@ -13,23 +15,23 @@ const CoCreateLogic = {
 		
 	// getKeys
 	__initKeys: function() {
-		if (localStorage.getItem('apiKey')) {
-			config.apiKey = localStorage.getItem('apiKey');
+		if (window.localStorage.getItem('apiKey')) {
+			config.apiKey = window.localStorage.getItem('apiKey');
 		}
-		if (localStorage.getItem('securityKey')) {
-			config.securityKey = localStorage.getItem('securityKey');
+		if (window.localStorage.getItem('securityKey')) {
+			config.securityKey = window.localStorage.getItem('securityKey');
 		}
-		if (localStorage.getItem('organization_id')) {
-			config.organization_Id = localStorage.getItem('organization_id');
+		if (window.localStorage.getItem('organization_id')) {
+			config.organization_Id = window.localStorage.getItem('organization_id');
 		}
 	},
 	
 	//. passSessionIds
 	__initPassSessionIds: function() {
-		let orgId = localStorage.getItem('organization_id');
-		let user_id = localStorage.getItem('user_id');
-		let adminUI_id = localStorage.getItem('adminUI_id');
-		let builderUI_id = localStorage.getItem('builderUI_id');
+		let orgId = window.localStorage.getItem('organization_id');
+		let user_id = window.localStorage.getItem('user_id');
+		let adminUI_id = window.localStorage.getItem('adminUI_id');
+		let builderUI_id = window.localStorage.getItem('builderUI_id');
 
 		this.__initPassItems(orgId, 			".sessionOrg_Id", true);
 		this.__initPassItems(user_id, 		".sessionUser_Id");
@@ -48,12 +50,12 @@ const CoCreateLogic = {
 		if (mainContainer != document && mainContainer.hasAttribute('data-pass_id')) {
 			elements.push(mainContainer)
 		}
-		let dataParams = localStorage.getItem('dataParams');
+		let dataParams = window.localStorage.getItem('dataParams');
 		dataParams = JSON.parse(dataParams);
 		if (!dataParams || dataParams.length == 0) return;
 		
 		elements.forEach((el) => {
-			if (CoCreateObserver.getInitialized(el)) {
+			if (CoCreate.observer.getInitialized(el)) {
 				return;
 			}
 			
@@ -62,7 +64,7 @@ const CoCreateLogic = {
 			if (!paramObj) return;
 
 			const {collection, document_id, pass_to, prefix} = paramObj;
-			CoCreateObserver.setInitialized(el)
+			CoCreate.observer.setInitialized(el)
 			
 			if (el.tagName === "FORM" && !el.getAttribute('data-colleciton') && collection) {
 				el.setAttribute('data-colleciton', collection);
@@ -108,7 +110,7 @@ const CoCreateLogic = {
 	
 	//. passParams
 	__initPassParams: function(pass_to) {
-		var dataParams = localStorage.getItem('dataParams');
+		var dataParams = window.localStorage.getItem('dataParams');
 		dataParams = JSON.parse(dataParams);
 
 		if (!dataParams || dataParams.length == 0) return;
@@ -147,7 +149,7 @@ const CoCreateLogic = {
 	
 	// passValueParams
 	__initPassValueParams: function(contianer) {
-		var valueParams = localStorage.getItem('valueParams');
+		var valueParams = window.localStorage.getItem('valueParams');
 		valueParams = JSON.parse(valueParams);
 		
 		if (!valueParams || valueParams.length == 0) return;
@@ -163,7 +165,7 @@ const CoCreateLogic = {
 				if (pass_value_id && pass_value_id == pass_value_to) {
 					if (['INPUT', 'TEXTAREA', 'SELECT'].includes(input.tagName)) {
 						input.value = valueParam.value;
-						if (CoCreateFloatLabel) CoCreateFloatLabel.update(input)
+						if (CoCreate.floatingLabel) CoCreate.floatingLabel.update(input)
 					} else {
 						input.innerHTML = valueParam.value;
 					}
@@ -363,7 +365,7 @@ const CoCreateLogic = {
 		})
 		
 		if (valueParams.length > 0) {
-			localStorage.setItem('valueParams', JSON.stringify(valueParams));
+			window.localStorage.setItem('valueParams', JSON.stringify(valueParams));
 		}
 		this.__initPassValueParams()
 		// let aTag = btn.querySelector('a');
@@ -385,12 +387,12 @@ const CoCreateLogic = {
 		}
 		
 		if (valueParams.length > 0) {
-			localStorage.setItem('valueParams', JSON.stringify(valueParams));
+			window.localStorage.setItem('valueParams', JSON.stringify(valueParams));
 		}
 	},
 	
 	initDataPassValues: function() {
-		localStorage.removeItem('valueParams');	
+		window.localStorage.removeItem('valueParams');	
 	},
 
 	//. openAnother
@@ -418,8 +420,8 @@ const CoCreateLogic = {
 		const href = aTag.getAttribute('href');
 		this.storePassData(aTag);
 		if (this.checkOpenCocreateModal(aTag)) {
-			if (g_cocreateWindow) {
-				g_cocreateWindow.openWindow(aTag);
+			if (typeof CoCreate.modal !== 'undefined') {
+				CoCreate.modal.open(aTag);
 			}
 		} else if (href) {
 			this.openAnother(aTag);
@@ -462,7 +464,7 @@ const CoCreateLogic = {
 			target.textContent = value;
 		  }
 		  
-		  if (CoCreateFloatLabel) CoCreateFloatLabel.update(target)
+		  if (CoCreate.floatingLabel) CoCreate.floatingLabel.update(target)
 		  
 		  target.dispatchEvent(new Event("input", {"bubbles":true})); 
 		  
@@ -487,197 +489,33 @@ const CoCreateLogic = {
 }
 
 
-const CoCreateAttributes = {
-	//. key: colleciton.document_id.name,
-	//. example:  
-	/** modules.xxxxx.test: [
-	 *	{el: element, attr: 'data-test1'},
-	 *	{el: element, attr: 'data-test2'}
-	 * ]
-	 * 
-	 **/
-	mainInfo: {},
-	
-	init: function() {
-		// CoCreate.registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
-		const self = this;
-		CoCreateSocket.listen('updateDocument', function(data) {
-			self.render(data)
-		})
-		
-		CoCreateSocket.listen('readDocument', function(data) {
-			self.render(data)
-		})
-		
-		CoCreateSocket.listen('connect', function(data) {
-			// self.getRequest()
-			self.__getRequest()
-		})
-	},
-
-	initElement: function(container) {
-		const requests = this.__getRequest(container)
-
-		if (requests) {
-			
-			requests.forEach((req) => {
-				CoCreate.readDocument({
-					collection: req['collection'],
-					document_id: req['document_id']
-				})
-			})
-		}
-	},
-
-	render: function(data) {
-		const collection = data['collection'];
-		const document_id = data['document_id'];
-		
-		for (let name in data.data) {
-			const key = this.__makeKey(collection, document_id, name) 
-			const value = data.data[name];
-			if (this.mainInfo[key]) {
-				this.mainInfo[key].forEach((item) => {
-					item.el.setAttribute(item.attr, value);
-					
-					// if (item.attr == 'data-collection') {
-					// 	CoCreate.runInitModule('cocreate-text');						
-					// } 
-					
-					item.el.dispatchEvent(new CustomEvent('CoCreateAttribute-run', {
-						eventType: 'rendered',
-						item: item.el
-					}))
-				})
-			}
-		}
-	},
-	
-	setValue: function(element, data) {
-		
-	},
-	
-	__getRequest: function(container) {
-		let fetch_container = container || document;
-		let elements = fetch_container.querySelectorAll('[fetch-for]');
-		let self = this;
-
-		let requestData = [];
-		
-		if (elements.length === 0 && fetch_container != document && fetch_container.hasAttributes('fetch-for')) {
-			elements = [fetch_container];
-		}
-
-		elements.forEach((el) => {
-			//. check
-			const el_collection = el.getAttribute('data-collection')
-			const el_documentId = el.getAttribute('data-document_id')
-			const el_name = el.getAttribute('name')
-			const el_value = el.getAttribute('value')
-			
-			const attributes = el.attributes;
-			
-			for (let i = 0; i < attributes.length; i++) {
-				let jsonInfo = self.__jsonParse(attributes[i].value);
-				if (jsonInfo) {
-					let collection = jsonInfo['collection'] || el_collection;
-					let document_id = jsonInfo['document_id'] || el_documentId;
-					let name = jsonInfo['name'] || el_name;
-					let value = jsonInfo['value'] || el_value;
-					
-					if (jsonInfo['data-pass_id']) {
-						let pass_info = self.__checkPassId(jsonInfo['data-pass_id']);
-						if (pass_info) {
-							collection = pass_info.collection;
-							document_id = pass_info.document_id;
-							value = pass_info.value;
-						} else {
-							collection = null;
-							document_id = null;
-							value = null;
-						}
-					}
-
-					const key = self.__makeKey(collection, document_id, name);
-					
-					if (collection && document_id && name) {
-						if (!self.mainInfo[key]) {
-							self.mainInfo[key] = [];
-						}
-						self.mainInfo[key].push({el: el, attr: attributes[i].name})
-						
-						if (!requestData.some((d) => d['collection'] === collection && d['document_id'] === document_id)) {
-							requestData.push({collection, document_id})
-						}
-					}
-				}
-			}
-		})
-		return requestData;
-	},
-	
-	__jsonParse: function(str_data) {
-		try {
-			let json_data = JSON.parse(str_data);
-			if (typeof json_data === 'object' && json_data != null) {
-				return json_data;
-			} else {
-				return null;
-			}
-		} catch (e) {
-			return null;
-		}
-	},
-	
-	__checkPassId: function(pass_id) {
-		var dataParams = localStorage.getItem('dataParams');
-		dataParams = JSON.parse(dataParams);
-
-		if (!dataParams || dataParams.length == 0) return null;
-
-		for (var i = 0; i < dataParams.length; i++) {
-			if (dataParams[i].pass_to == pass_id) {
-				return {
-					collection: dataParams[i].collection, 
-					document_id: dataParams[i].document_id,
-					value: dataParams[i].value
-				};
-			}
-		}
-		return null;
-	},
-	
-	__makeKey: function (collection, document_id, name) {
-		return `${collection}_${document_id}_${name}`;
-	},
-}
-
-
-CoCreateAttributes.init();
 CoCreateLogic.init();
-// CoCreateInit.register('CoCreateAttributes', CoCreateAttributes, CoCreateAttributes.initElement);
 
-CoCreateObserver.add({ 
+CoCreate.observer.add({ 
 	name: 'CoCreateAttributes', 
 	observe: ['subtree', 'childList'],
 	include: '[data-for]', 
-	task: function(mutation) {
-		CoCreateAttributes.initElement(mutation.target)
+	callback: function(mutation) {
+		CoCreateLogic.attributes.initElement(mutation.target)
 	}
-})
+});
 
-// CoCreateInit.register('CoCreateLogic', CoCreateLogic, CoCreateLogic.initElement);
-
-CoCreateObserver.add({ 
+CoCreate.observer.add({ 
 	name: 'CoCreateLogic', 
 	observe: ['subtree', 'childList'],
 	include: '[data-pass_id]', 
-	task: function(mutation) {
+	callback: function(mutation) {
 		CoCreateLogic.initElement(mutation.target)
 	}
+});
+
+CoCreate.actions.add({
+	action: "passValueAction",
+	endEvent: "passValueActionEnd",
+	callback: (btn, data) => {
+		CoCreateLogic.passProcessAction(btn)
+	},
 })
 
-CoCreateAction.registerEvent("passValueAction", CoCreateLogic.passProcessAction, CoCreateLogic, "passValueActionEnd");
 
-// export default CoCreateLogic;
-// export default CoCreateAttributes;
+export default CoCreateLogic;
