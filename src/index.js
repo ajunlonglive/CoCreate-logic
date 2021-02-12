@@ -509,13 +509,12 @@ CoCreate.observer.add({
 	}
 });
 
-CoCreate.actions.add({
+CoCreate.action.init({
 	action: "passValueAction",
 	endEvent: "passValueActionEnd",
 	callback: (btn, data) => {
 		CoCreateLogic.passProcessAction(btn)
 	},
 })
-
 
 export default CoCreateLogic;
