@@ -491,7 +491,7 @@ const CoCreateLogic = {
 
 CoCreateLogic.init();
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateAttributes', 
 	observe: ['subtree', 'childList'],
 	include: '[data-for]', 
@@ -500,7 +500,7 @@ CoCreate.observer.add({
 	}
 });
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateLogic', 
 	observe: ['subtree', 'childList'],
 	include: '[data-pass_id]', 

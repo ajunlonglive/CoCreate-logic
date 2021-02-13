@@ -167,7 +167,7 @@ const CoCreateAttributes = {
 
 CoCreateAttributes.init();
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateAttributes', 
 	observe: ['subtree', 'childList'],
 	include: '[data-for]', 

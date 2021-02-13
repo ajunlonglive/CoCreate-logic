@@ -657,7 +657,7 @@ CoCreateAttributes.init();
 CoCreateLogic.init();
 // CoCreateInit.register('CoCreateAttributes', CoCreateAttributes, CoCreateAttributes.initElement);
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateAttributes', 
 	observe: ['subtree', 'childList'],
 	include: '[data-for]', 
@@ -668,7 +668,7 @@ CoCreate.observer.add({
 
 // CoCreateInit.register('CoCreateLogic', CoCreateLogic, CoCreateLogic.initElement);
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateLogic', 
 	observe: ['subtree', 'childList'],
 	include: '[data-pass_id]', 
