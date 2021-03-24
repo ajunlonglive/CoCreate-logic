@@ -1,3 +1,6 @@
+import observer from '../../CoCreate-observer/src'
+import utils from '../../../CoCreateJS/src/utils';
+import {socket, crud} from '../../../CoCreateJS/src';
 
 const CoCreateAttributes = {
 	//. key: colleciton.document_id.name,
@@ -11,17 +14,17 @@ const CoCreateAttributes = {
 	mainInfo: {},
 	
 	init: function() {
-		// CoCreate.registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
+		// registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
 		const self = this;
-		CoCreate.socket.listen('updateDocument', function(data) {
+		socket.listen('updateDocument', function(data) {
 			self.render(data)
 		})
 		
-		CoCreate.socket.listen('readDocument', function(data) {
+		socket.listen('readDocument', function(data) {
 			self.render(data)
 		})
 		
-		CoCreate.socket.listen('connect', function(data) {
+		socket.listen('connect', function(data) {
 			// self.getRequest()
 			self.__getRequest()
 		})
@@ -33,7 +36,7 @@ const CoCreateAttributes = {
 		if (requests) {
 			
 			requests.forEach((req) => {
-				CoCreate.crud.readDocument({
+				crud.readDocument({
 					collection: req['collection'],
 					document_id: req['document_id']
 				})
@@ -53,7 +56,7 @@ const CoCreateAttributes = {
 					item.el.setAttribute(item.attr, value);
 					
 					// if (item.attr == 'data-collection') {
-					// 	CoCreate.runInitModule('cocreate-text');						
+					// 	runInitModule('cocreate-text');						
 					// } 
 					
 					item.el.dispatchEvent(new CustomEvent('CoCreateAttribute-run', {
@@ -161,13 +164,13 @@ const CoCreateAttributes = {
 	
 	__makeKey: function (collection, document_id, name) {
 		return `${collection}_${document_id}_${name}`;
-	},
+	}, 
 }
 
 
 CoCreateAttributes.init();
 
-CoCreate.observer.init({ 
+observer.init({ 
 	name: 'CoCreateAttributes', 
 	observe: ['subtree', 'childList'],
 	include: '[data-for]', 

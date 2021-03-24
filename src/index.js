@@ -1,3 +1,5 @@
+import observer from '../../CoCreate-observer/src'
+import action from '../../CoCreate-action/src'
 import CoCreateAttributes from "./attributes.js"
 
 const CoCreateLogic = {
@@ -55,7 +57,7 @@ const CoCreateLogic = {
 		if (!dataParams || dataParams.length == 0) return;
 		
 		elements.forEach((el) => {
-			if (CoCreate.observer.getInitialized(el)) {
+			if (observer.getInitialized(el)) {
 				return;
 			}
 			
@@ -64,7 +66,7 @@ const CoCreateLogic = {
 			if (!paramObj) return;
 
 			const {collection, document_id, pass_to, prefix} = paramObj;
-			CoCreate.observer.setInitialized(el)
+			observer.setInitialized(el)
 			
 			if (el.tagName === "FORM" && !el.getAttribute('data-colleciton') && collection) {
 				el.setAttribute('data-colleciton', collection);
@@ -491,7 +493,7 @@ const CoCreateLogic = {
 
 CoCreateLogic.init();
 
-CoCreate.observer.init({ 
+observer.init({ 
 	name: 'CoCreateAttributes', 
 	observe: ['subtree', 'childList'],
 	include: '[data-for]', 
@@ -500,7 +502,7 @@ CoCreate.observer.init({
 	}
 });
 
-CoCreate.observer.init({ 
+observer.init({ 
 	name: 'CoCreateLogic', 
 	observe: ['subtree', 'childList'],
 	include: '[data-pass_id]', 
@@ -509,7 +511,7 @@ CoCreate.observer.init({
 	}
 });
 
-CoCreate.action.init({
+action.init({
 	action: "passValueAction",
 	endEvent: "passValueActionEnd",
 	callback: (btn, data) => {
