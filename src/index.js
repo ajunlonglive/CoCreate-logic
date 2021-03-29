@@ -1,5 +1,5 @@
-import observer from '../../CoCreate-observer/src'
-import action from '../../CoCreate-action/src'
+import observer from '@cocreate/observer'
+import action from '@cocreate/action'
 import CoCreateAttributes from "./attributes.js"
 
 const CoCreateLogic = {

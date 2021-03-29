@@ -1,5 +1,5 @@
-import observer from '../../CoCreate-observer/src'
-import utils from '../../../CoCreateJS/src/utils';
+import observer from '@cocreate/observer'
+import utils from '@cocreate/utils';
 import {socket, crud} from '../../../CoCreateJS/src';
 
 const CoCreateAttributes = {
