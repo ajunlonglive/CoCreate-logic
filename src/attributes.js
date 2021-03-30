@@ -1,6 +1,6 @@
 import observer from '@cocreate/observer'
 import utils from '@cocreate/utils';
-import {socket, crud} from '../../../CoCreateJS/src';
+import {socket, crud} from '@cocreate/cocreatejs';
 
 const CoCreateAttributes = {
 	//. key: colleciton.document_id.name,
