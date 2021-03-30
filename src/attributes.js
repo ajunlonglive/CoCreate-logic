@@ -1,6 +1,6 @@
 import observer from '@cocreate/observer'
 import utils from '@cocreate/utils';
-import {socket, crud} from '@cocreate/cocreatejs';
+import crud from '@cocreate/crud';
 
 const CoCreateAttributes = {
 	//. key: colleciton.document_id.name,
@@ -16,15 +16,15 @@ const CoCreateAttributes = {
 	init: function() {
 		// registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
 		const self = this;
-		socket.listen('updateDocument', function(data) {
+		crud.listen('updateDocument', function(data) {
 			self.render(data)
 		})
 		
-		socket.listen('readDocument', function(data) {
+		crud.listen('readDocument', function(data) {
 			self.render(data)
 		})
 		
-		socket.listen('connect', function(data) {
+		crud.listen('connect', function(data) {
 			// self.getRequest()
 			self.__getRequest()
 		})
