@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.2...v1.0.3) (2021-03-30)
+
+
+### Bug Fixes
+
+* import paths using npm ([c3aee30](https://github.com/CoCreate-app/CoCreate-logic/commit/c3aee30c172e6279f335536a3213609388b400ac))
+
 ## [1.0.2](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.1...v1.0.2) (2021-03-30)
 
 
