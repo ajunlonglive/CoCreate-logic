@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.3...v1.0.4) (2021-04-04)
+
+
+### Bug Fixes
+
+* update socket to socket-lient and crud to crud client" ([9a699cc](https://github.com/CoCreate-app/CoCreate-logic/commit/9a699cc670c9e2bc97b5c0e987c4fd2241102647))
+
 ## [1.0.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.2...v1.0.3) (2021-03-30)
 
 
