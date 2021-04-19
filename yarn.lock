@@ -839,6 +839,15 @@
     "@cocreate/docs" "^1.0.3"
     mini-css-extract-plugin "^1.5.0"
 
+"@cocreate/crud-client@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@cocreate/crud-client/-/crud-client-1.0.5.tgz#66c54ae6ebd72fa6dcaf93caf2ffc866294143a0"
+  integrity sha512-6WFm6Dh+JHT+Lza5W3dQ4W0Hm35CozYhRdk/dwe/LR+zUQRpUIUxTLkqGntlGk8BmPn+jJdrJFIRRo5jGPzpPg==
+  dependencies:
+    "@cocreate/docs" "^1.0.3"
+    "@cocreate/socket-client" "^1.0.2"
+    mini-css-extract-plugin "^1.5.0"
+
 "@cocreate/docs@^1.0.3":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@cocreate/docs/-/docs-1.1.2.tgz#3ed93927574e400d2a832651f6d3c32f46ab38b3"
@@ -853,6 +862,23 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@cocreate/observer/-/observer-1.0.2.tgz#b29cb1db6fc78f533b8c53e1b97a221065413bd6"
   integrity sha512-Lml118xYD+sXL/N7vc+hUcir0dm5OvVch/VD+TI53sIULDin9w1aP0tvcwD90yEzenPlkJ7luLD7/Yf9ARnrAg==
+  dependencies:
+    "@cocreate/docs" "^1.0.3"
+    mini-css-extract-plugin "^1.5.0"
+
+"@cocreate/socket-client@^1.0.2":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@cocreate/socket-client/-/socket-client-1.0.4.tgz#375f07f7134f564d6faf83b3d850fd276db19ff2"
+  integrity sha512-ChZIqIqcgozeNPH2w1KoX0f8kFavmudnROi9V5kgUWq9o2qMqW2bPktsachEPFUawxpjkymYHQu4FT1TxLUnWw==
+  dependencies:
+    "@cocreate/docs" "^1.0.3"
+    mini-css-extract-plugin "^1.5.0"
+    ws "^7.4.4"
+
+"@cocreate/utils@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@cocreate/utils/-/utils-1.0.3.tgz#3eefcb4a9b309dbf94d5796078745f715eb264ad"
+  integrity sha512-ATFDqKxvCwrre/ZfRV/RG+z2aULxcxduGDluftHWh/d14TBRvyGIa766SUENc8j0KfPcSkn6SK/kR36BDLtI1w==
   dependencies:
     "@cocreate/docs" "^1.0.3"
     mini-css-extract-plugin "^1.5.0"
@@ -3200,7 +3226,7 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-ws@^7.3.1:
+ws@^7.3.1, ws@^7.4.4:
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
   integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
