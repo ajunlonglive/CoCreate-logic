@@ -1,3 +1,13 @@
+## [1.0.5](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.4...v1.0.5) (2021-04-23)
+
+
+### Bug Fixes
+
+* add missing packages ([204786c](https://github.com/CoCreate-app/CoCreate-logic/commit/204786c6bed716291d67476f6812883aee274ec2))
+* add missing packages ([663b128](https://github.com/CoCreate-app/CoCreate-logic/commit/663b128baa4647ac605c7013c5ca614a57810cbb))
+* ci and build process ([4c9041c](https://github.com/CoCreate-app/CoCreate-logic/commit/4c9041cef13b2d061103dc0e54d3a1fda378436f))
+* npm publish and cdn deployment ([e4ad6ab](https://github.com/CoCreate-app/CoCreate-logic/commit/e4ad6ab30b4e3b27df5eb9824aa4d65efc0ef39e))
+
 ## [1.0.4](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.3...v1.0.4) (2021-04-04)
 
 
