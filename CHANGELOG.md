@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.5...v1.0.6) (2021-04-23)
+
+
+### Bug Fixes
+
+* readme and documentation. Removed securitykeys ([b9371ba](https://github.com/CoCreate-app/CoCreate-logic/commit/b9371baccb98b51718bed2eb423214b0f3829a3b))
+
 ## [1.0.5](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.4...v1.0.5) (2021-04-23)
 
 
