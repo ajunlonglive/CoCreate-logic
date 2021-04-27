@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.6...v1.0.7) (2021-04-27)
+
+
+### Bug Fixes
+
+* Update to readme, demo, added cdn scripts ([bc511cd](https://github.com/CoCreate-app/CoCreate-logic/commit/bc511cd5b214a39abf7a5d1ab73f33d9499ffbc9))
+
 ## [1.0.6](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.5...v1.0.6) (2021-04-23)
 
 
