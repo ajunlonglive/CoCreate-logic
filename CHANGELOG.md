@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.7...v1.0.8) (2021-04-27)
+
+
+### Bug Fixes
+
+* add host in docs ([b5e363b](https://github.com/CoCreate-app/CoCreate-logic/commit/b5e363bf4692f0d01af8b8ee7798a2b44d1a4ead))
+
 ## [1.0.7](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.6...v1.0.7) (2021-04-27)
 
 
