@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/logic",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A simple logic component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API.",
   "keywords": [
     "logic",
