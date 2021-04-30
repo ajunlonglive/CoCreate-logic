@@ -10,7 +10,7 @@ module.exports = {
             "path": "./docs/index.html",
             "collection": "files",
             "document_id": "602069863c260207bf49cab2",
-            "key": "html",
+            "key": "src",
             "data":{
                 "name": "logic Doc",
                 "domains": ["cocreate.app", "server.cocreate.app", "ws.cocreate.app"],
