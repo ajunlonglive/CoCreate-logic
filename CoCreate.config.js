@@ -7,7 +7,7 @@ module.exports = {
 	},
 
     "sources": [{
-            "path": "./docs/index.html",
+            "entry": "./docs/index.html",
             "collection": "files",
             "document_id": "602069863c260207bf49cab2",
             "key": "src",
