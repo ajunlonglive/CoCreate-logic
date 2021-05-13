@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.8...v1.0.9) (2021-05-08)
+
+
+### Bug Fixes
+
+* add css auto parse and save to docs. ([6ce86d2](https://github.com/CoCreate-app/CoCreate-logic/commit/6ce86d233a7bab0b9e5fdf955f1674def0dcd3f9))
+
 ## [1.0.8](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.7...v1.0.8) (2021-04-27)
 
 
