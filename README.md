@@ -1,6 +1,6 @@
 # CoCreate-logic
 
-A simple logic component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API. Take it for a spin in our [playground!](https://cocreate.app/docs/logic)
+Data attributes which can be used for components in CoCreate framework combined as a group of attributes that dynamically change attributes & fetch custom data. Take it for a spin in our [playground!](https://cocreate.app/docs/logic)
 
 ![GitHub file size in bytes](https://img.shields.io/github/size/CoCreate-app/CoCreate-logic/dist/CoCreate-logic.min.js?label=minified%20size&style=for-the-badge)
 ![GitHub latest release](https://img.shields.io/github/v/release/CoCreate-app/CoCreate-logic?style=for-the-badge)
