@@ -171,11 +171,11 @@ const CoCreateAttributes = {
 CoCreateAttributes.init();
 
 observer.init({ 
-	name: 'CoCreateAttributes', 
-	observe: ['subtree', 'childList'],
-	include: '[data-for]', 
+	name: 'CoCreateLogicAttributes', 
+	observe: ['addedNodes'],
 	callback: function(mutation) {
-		CoCreateAttributes.initElement(mutation.target)
+		if(mutation.target.tagName && mutation.target.hasAttribute('data-for'))
+			CoCreateAttributes.initElement(mutation.target)
 	}
 });
 
