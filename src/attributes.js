@@ -173,8 +173,9 @@ CoCreateAttributes.init();
 observer.init({ 
 	name: 'CoCreateLogicAttributes', 
 	observe: ['addedNodes'],
+	attributesFilter:['data-for'],
 	callback: function(mutation) {
-		if(mutation.target.tagName && mutation.target.hasAttribute('data-for'))
+	
 			CoCreateAttributes.initElement(mutation.target)
 	}
 });

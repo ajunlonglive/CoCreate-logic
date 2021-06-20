@@ -505,21 +505,20 @@ CoCreateLogic.init();
 observer.init({
 	name: 'CoCreateAttributes',
 	observe: ['addedNodes'],
+	attributesFilter: ['data-for'],
 	callback: function(mutation) {
 		let el = mutation.target;
-		if (!el.tagName || !el.hasAttributes('data-for'))
-			return;
-		CoCreateLogic.attributes.initElement(mutation.target)
+
+		CoCreateLogic.attributes.initElement(el)
 	}
 });
 
 observer.init({
 	name: 'CoCreateLogic',
 	observe: ['addedNodes'],
+		attributesFilter: ['data-pass_id'],
 	callback: function(mutation) {
-		let el = mutation.target;
-		if (!el.tagName || !el.hasAttributes('data-pass_id'))
-			return;
+
 		CoCreateLogic.initElement(mutation.target)
 	}
 });
