@@ -1,3 +1,11 @@
+## [1.0.13](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.12...v1.0.13) (2021-06-24)
+
+
+### Bug Fixes
+
+* add method to turn on and off console.log while in development ([323d918](https://github.com/CoCreate-app/CoCreate-logic/commit/323d9189d175a06a2ed8c368d7953d8807ccaea3))
+* update all [@cocreate](https://github.com/cocreate) to use latest versions ([cc9b250](https://github.com/CoCreate-app/CoCreate-logic/commit/cc9b2502fc771d701954b90744566e26eb9ba98d))
+
 ## [1.0.12](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.11...v1.0.12) (2021-06-20)
 
 
