@@ -131,6 +131,7 @@ const CoCreateAttributes = {
 		return requestData;
 	},
 	
+	// ToDo duplicate.. exist in Utils and utils.crud
 	__jsonParse: function(str_data) {
 		try {
 			let json_data = JSON.parse(str_data);

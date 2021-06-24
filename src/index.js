@@ -10,7 +10,6 @@ const CoCreateLogic = {
 		this.__initPassSessionIds();
 		this.__initPassParams();
 		this.__initPassValueParams();
-		// this.__initValuePassBtns();
 		this.__initGetValueInput();
 		this.initAtagElement();
 	},
@@ -40,6 +39,18 @@ const CoCreateLogic = {
 		this.__initPassItems(adminUI_id, ".sessionAdminUI_Id");
 		this.__initPassItems(builderUI_id, ".sessionBuilderUI_Id");
 	},
+	
+	__initPassItems: function(id, selector, noFetch) {
+		const self = this;
+		if (id) {
+			let elements = document.querySelectorAll(selector);
+			elements.forEach(el => {
+				self.__setAttributeValueOfElement(el, 'data-document_id', id);
+				self.__setAttributeValueOfElement(el, 'data-filter_value', id);
+			})
+		}
+	},
+
 
 	initElement: function(container) {
 		const self = this;
@@ -93,7 +104,7 @@ const CoCreateLogic = {
 			const href = target.getAttribute('href');
 			if (target.getAttribute('target') !== 'modal') {
 				if (target.hasAttribute('data-actions')) return;
-				if (!self.passSubmitProcess(target)) return;
+				// if (!self.passSubmitProcess(target)) return;
 				const pass_to = target.getAttribute('data-pass_to');
 				if (href) {
 					event.preventDefault();
@@ -159,7 +170,7 @@ const CoCreateLogic = {
 
 		valueParams.forEach(function(valueParam) {
 			var pass_value_to = valueParam.pass_value_to;
-			// var inputs = (contianer || document).querySelectorAll('input, textarea, select');
+
 			var inputs = (contianer || document).querySelectorAll('[data-pass_value_id]');
 
 			inputs.forEach((input) => {
@@ -279,19 +290,6 @@ const CoCreateLogic = {
 	},
 
 
-	//. initValuePassBtns
-	__initValuePassBtns: function() {
-		// let forms = document.getElementsByTagName('form');
-
-		// for (let i=0; i < forms.length; i++) {
-		// 	let form = forms[i];
-
-		// 	let valuePassBtn = form.querySelector('.passValueBtn');
-
-		// 	if (valuePassBtn) this.__registerValuePassBtnEvent(form, valuePassBtn);
-		// }
-	},
-
 	__initGetValueInput: function() {
 		var inputs = document.querySelectorAll('input, textarea');
 		let self = this;
@@ -311,43 +309,6 @@ const CoCreateLogic = {
 				self.__setGetValueProcess(this.id, this.value);
 			})
 		}
-	},
-
-	//. initValuePassBtn
-	__registerValuePassBtnEvent: function(form, valuePassBtn) {
-		// let self = this;
-		// return;
-		// valuePassBtn.addEventListener('click', function(e) {
-		// 	let inputs = form.querySelectorAll('input, textarea, select');
-
-		// 	if (valuePassBtn.hasAttribute('data-actions')) {
-		// 		return;
-		// 	}
-
-		// 	let valueParams = [];
-
-		// 	for (let i = 0; i < inputs.length; i++) {
-		// 		let input = inputs[i];
-
-		// 		let pass_value_to = input.getAttribute('data-pass_value_to');
-		// 		let value = input.value;
-
-		// 		if (pass_value_to) {
-		// 			valueParams.push({
-		// 				pass_value_to: pass_value_to,
-		// 				value: value
-		// 			})
-		// 		}
-		// 	}
-
-		// 	if (valueParams.length > 0) localStorage.setItem('valueParams', JSON.stringify(valueParams));
-
-		// 	self.__initPassValueParams();
-
-		// 	let aTag = valuePassBtn.querySelector('a');
-
-		// 	if (aTag) self.setLinkProcess(aTag);
-		// })
 	},
 
 	passProcessAction: function(btn) {
@@ -445,19 +406,19 @@ const CoCreateLogic = {
 		return false;
 	},
 
-	passSubmitProcess: function(element) {
-		if (element.parentNode.classList.contains('submitBtn')) {
-			if (element.getAttribute('data-pass_to') && element.getAttribute('data-pass_document_id')) {
-				return true;
-			}
-			else {
-				return false
-			}
-		}
-		else {
-			return true;
-		}
-	},
+	// passSubmitProcess: function(element) {
+	// 	if (element.parentNode.classList.contains('submitBtn')) {
+	// 		if (element.getAttribute('data-pass_to') && element.getAttribute('data-pass_document_id')) {
+	// 			return true;
+	// 		}
+	// 		else {
+	// 			return false
+	// 		}
+	// 	}
+	// 	else {
+	// 		return true;
+	// 	}
+	// },
 
 
 	__setGetValueProcess: function(id, value) {
@@ -486,17 +447,6 @@ const CoCreateLogic = {
 		})
 	},
 
-	__initPassItems: function(id, selector, noFetch) {
-		const self = this;
-		if (id) {
-			let elements = document.querySelectorAll(selector);
-			elements.forEach(el => {
-				self.__setAttributeValueOfElement(el, 'data-document_id', id);
-				// self.__setAttributeValueOfElement(el, 'data-fetch_document_id', id);
-				self.__setAttributeValueOfElement(el, 'data-filter_value', id);
-			})
-		}
-	},
 }
 
 
