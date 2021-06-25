@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.14...v1.0.15) (2021-06-25)
+
+
+### Bug Fixes
+
+* latest version numbers applied to all cocreate packages ([895f4f1](https://github.com/CoCreate-app/CoCreate-logic/commit/895f4f1eacac7dab468a0869c2c9429e5eaa3c5d))
+
 ## [1.0.14](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.13...v1.0.14) (2021-06-24)
 
 
