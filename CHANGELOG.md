@@ -1,3 +1,10 @@
+## [1.0.16](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.15...v1.0.16) (2021-06-30)
+
+
+### Bug Fixes
+
+* automated and manual workflows ([b57504c](https://github.com/CoCreate-app/CoCreate-logic/commit/b57504cfcf8f7b3e14e0a11b1e0671b97bb34384))
+
 ## [1.0.15](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.14...v1.0.15) (2021-06-25)
 
 
