@@ -94,7 +94,7 @@ const CoCreateLogic = {
 			const target = event.target.closest('a, button')
 			if (!target) return;
 
-			if (target.getAttribute('target') === 'modal' && target.getAttribute('data-pass_to')) {
+			if (target.getAttribute('target') === 'modal') {
 				event.preventDefault();
 				// event.stopImmediatePropagation()
 				self.setLinkProcess(target);
@@ -455,7 +455,7 @@ CoCreateLogic.init();
 observer.init({
 	name: 'CoCreateAttributes',
 	observe: ['addedNodes'],
-	attributesFilter: ['data-for'],
+	attributesFilter: ['fetch-for'],
 	callback: function(mutation) {
 		let el = mutation.target;
 

@@ -14,7 +14,6 @@ const CoCreateAttributes = {
 	mainInfo: {},
 	
 	init: function() {
-		// registerModule('fetch-attributes', this, null, this.getRequest, this.renderAttribute);
 		const self = this;
 		crud.listen('updateDocument', function(data) {
 			self.render(data)
@@ -53,7 +52,14 @@ const CoCreateAttributes = {
 			const value = data.data[name];
 			if (this.mainInfo[key]) {
 				this.mainInfo[key].forEach((item) => {
-					item.el.setAttribute(item.attr, value);
+					let attr_value = item.el.getAttribute(item.attr)
+					if (attr_value) {
+						let json_str = this.__findJSONSection(attr_value)
+						if (json_str) {
+							attr_value = attr_value.replace(json_str, value);
+						}
+					}
+					item.el.setAttribute(item.attr, attr_value);
 					
 					// if (item.attr == 'data-collection') {
 					// 	runInitModule('cocreate-text');						
@@ -134,7 +140,7 @@ const CoCreateAttributes = {
 	// ToDo duplicate.. exist in Utils and utils.crud
 	__jsonParse: function(str_data) {
 		try {
-			let json_data = JSON.parse(str_data);
+			let json_data = JSON.parse(this.__findJSONSection(str_data));
 			if (typeof json_data === 'object' && json_data != null) {
 				return json_data;
 			} else {
@@ -143,6 +149,17 @@ const CoCreateAttributes = {
 		} catch (e) {
 			return null;
 		}
+	},
+	
+	__findJSONSection: function(str_data) {
+		try {
+			let match_data = str_data.match(/({[A-Za-z0-9_.,\[\]\-"": ]*})/g);
+			if (match_data) {
+				return match_data[0];
+			}
+		} catch (e) {
+			return null;
+		} 
 	},
 	
 	__checkPassId: function(pass_id) {
@@ -170,15 +187,16 @@ const CoCreateAttributes = {
 
 
 CoCreateAttributes.init();
+CoCreateAttributes.initElement();
 
-observer.init({ 
-	name: 'CoCreateLogicAttributes', 
-	observe: ['addedNodes'],
-	attributesFilter:['data-for'],
-	callback: function(mutation) {
+// observer.init({ 
+// 	name: 'CoCreateLogicAttributes', 
+// 	observe: ['addedNodes'],
+// 	attributesFilter:['fetch-for'],
+// 	callback: function(mutation) {
 	
-			CoCreateAttributes.initElement(mutation.target)
-	}
-});
+// 			CoCreateAttributes.initElement(mutation.target)
+// 	}
+// });
 
 export default CoCreateAttributes;
