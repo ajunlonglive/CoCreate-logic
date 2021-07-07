@@ -1,3 +1,10 @@
+## [1.0.18](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.17...v1.0.18) (2021-07-07)
+
+
+### Bug Fixes
+
+* attributes supports previous value ([e3f3150](https://github.com/CoCreate-app/CoCreate-logic/commit/e3f31507cd7718092209495049a4a48ca791fc41))
+
 ## [1.0.17](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.16...v1.0.17) (2021-06-30)
 
 
