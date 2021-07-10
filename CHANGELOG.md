@@ -1,3 +1,10 @@
+## [1.0.19](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.18...v1.0.19) (2021-07-10)
+
+
+### Bug Fixes
+
+* gitignore all logs ([6f62eea](https://github.com/CoCreate-app/CoCreate-logic/commit/6f62eea06f1c7b9dd77a603f71814bea169566a8))
+
 ## [1.0.18](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.17...v1.0.18) (2021-07-07)
 
 
