@@ -1,3 +1,10 @@
+## [1.0.20](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.19...v1.0.20) (2021-07-13)
+
+
+### Bug Fixes
+
+* modal url ([38990c6](https://github.com/CoCreate-app/CoCreate-logic/commit/38990c6ead6f3d3799317efc16dea3cf597e4072))
+
 ## [1.0.19](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.18...v1.0.19) (2021-07-10)
 
 
