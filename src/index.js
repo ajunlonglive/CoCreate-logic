@@ -19,9 +19,9 @@ const CoCreateLogic = {
 		if (window.localStorage.getItem('apiKey')) {
 			config.apiKey = window.localStorage.getItem('apiKey');
 		}
-		if (window.localStorage.getItem('securityKey')) {
-			config.securityKey = window.localStorage.getItem('securityKey');
-		}
+		// if (window.localStorage.getItem('securityKey')) {
+		// 	config.securityKey = window.localStorage.getItem('securityKey');
+		// }
 		if (window.localStorage.getItem('organization_id')) {
 			config.organization_Id = window.localStorage.getItem('organization_id');
 		}
