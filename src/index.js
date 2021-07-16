@@ -455,7 +455,7 @@ CoCreateLogic.init();
 observer.init({
 	name: 'CoCreateAttributes',
 	observe: ['addedNodes'],
-	attributesFilter: ['fetch-for'],
+	attributeName: ['fetch-for'],
 	callback: function(mutation) {
 		let el = mutation.target;
 
@@ -466,7 +466,7 @@ observer.init({
 observer.init({
 	name: 'CoCreateLogic',
 	observe: ['addedNodes'],
-		attributesFilter: ['data-pass_id'],
+		attributeName: ['data-pass_id'],
 	callback: function(mutation) {
 
 		CoCreateLogic.initElement(mutation.target)

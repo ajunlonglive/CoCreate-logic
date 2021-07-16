@@ -192,7 +192,7 @@ CoCreateAttributes.initElement();
 // observer.init({ 
 // 	name: 'CoCreateLogicAttributes', 
 // 	observe: ['addedNodes'],
-// 	attributesFilter:['fetch-for'],
+// 	target: '[fetch-for]',
 // 	callback: function(mutation) {
 	
 // 			CoCreateAttributes.initElement(mutation.target)
