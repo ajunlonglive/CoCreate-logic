@@ -1,3 +1,25 @@
+## [1.0.22](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.21...v1.0.22) (2021-07-14)
+
+
+### Bug Fixes
+
+* upgrade all packages ([6efbc1c](https://github.com/CoCreate-app/CoCreate-logic/commit/6efbc1c2654c935fafbcbd991b0b37bf847798b1))
+
+## [1.0.21](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.20...v1.0.21) (2021-07-13)
+
+
+### Bug Fixes
+
+* add yarn lockfile to git ignore ([fd5e5a1](https://github.com/CoCreate-app/CoCreate-logic/commit/fd5e5a1fac1a25575d64bbc2010588df124a2a7c))
+* remove yarn.lock ([4c3c5d2](https://github.com/CoCreate-app/CoCreate-logic/commit/4c3c5d255a4ef4d07f83b223705d61359b0a8022))
+
+## [1.0.20](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.19...v1.0.20) (2021-07-13)
+
+
+### Bug Fixes
+
+* modal url ([38990c6](https://github.com/CoCreate-app/CoCreate-logic/commit/38990c6ead6f3d3799317efc16dea3cf597e4072))
+
 ## [1.0.19](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.18...v1.0.19) (2021-07-10)
 
 
