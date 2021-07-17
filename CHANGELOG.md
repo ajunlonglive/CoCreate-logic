@@ -1,3 +1,11 @@
+## [1.0.23](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.22...v1.0.23) (2021-07-17)
+
+
+### Bug Fixes
+
+* init and update demos scripts ([82f7b5f](https://github.com/CoCreate-app/CoCreate-logic/commit/82f7b5ffd9fb384a755873ccba84c1e1ee234f97))
+* workflows ([e4ac180](https://github.com/CoCreate-app/CoCreate-logic/commit/e4ac18081e4fba0a3f841b19bb36274028905d19))
+
 ## [1.0.22](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.21...v1.0.22) (2021-07-14)
 
 
