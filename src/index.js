@@ -71,10 +71,8 @@ const CoCreateLogic = {
 
 			if (target.getAttribute('target') === 'modal') {
 				event.preventDefault();
-				if (self.checkOpenCocreateModal(target)) {
-					if (typeof CoCreate.modal !== 'undefined') {
-						CoCreate.modal.open(target);
-					}
+				if (typeof CoCreate.modal !== 'undefined') {
+					CoCreate.modal.open(target);
 				}
 			}
 			else if (href) {
@@ -85,14 +83,13 @@ const CoCreateLogic = {
 		})
 	},
 
-	checkOpenCocreateModal: function(atag) {
-		if (atag.getAttribute('target') === "modal") {
-			return true;
-		}
-		return false;
-	},
+	// checkOpenModal: function(atag) {
+	// 	if (atag.getAttribute('target') === "modal") {
+	// 		return true;
+	// 	}
+	// 	return false;
+	// },
 	
-	//. openAnother
 	openAnother: function(atag) {
 
 		var href = atag.getAttribute('href');
