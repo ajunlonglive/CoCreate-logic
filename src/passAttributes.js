@@ -19,11 +19,11 @@ const CoCreatePassAttributes = {
 		if (!dataParams || dataParams.length == 0) return;
 		let found = dataParams.find(everyItem => everyItem.pass_to == pass_id)
 		if (!found) return;
-		this.setPassAttributes(element, found)
+		this._setAttributeValues(element, found)
 
 	},
 
-	setPassAttributes: function(el, param) {
+	_setAttributeValues: function(el, param) {
 		const {
 			collection,
 			document_id,
@@ -40,48 +40,48 @@ const CoCreatePassAttributes = {
 		if (pass_id != pass_to) return;
 
 		if (collection) {
-			this.__setAttributeValueOfElement(el, 'data-collection', collection, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-fetch_collection', collection, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_fetch_collection', collection, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_collection', collection, isRefresh);
+			this._setAttributeValue(el, 'data-collection', collection, isRefresh);
+			this._setAttributeValue(el, 'data-fetch_collection', collection, isRefresh);
+			this._setAttributeValue(el, 'data-pass_fetch_collection', collection, isRefresh);
+			this._setAttributeValue(el, 'data-pass_collection', collection, isRefresh);
 		}
 
 		if (document_id) {
-			this.__setAttributeValueOfElement(el, 'data-document_id', document_id, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-fetch_document_id', document_id, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_fetch_document_id', document_id, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'data-document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'data-fetch_document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'data-pass_fetch_document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'data-pass_document_id', document_id, isRefresh);
 		}
 
 		if (name) {
-			this.__setAttributeValueOfElement(el, 'name', name, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-fetch_name', name, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_name', name, isRefresh);
+			this._setAttributeValue(el, 'name', name, isRefresh);
+			this._setAttributeValue(el, 'data-fetch_name', name, isRefresh);
+			this._setAttributeValue(el, 'data-pass_name', name, isRefresh);
 		}
 
 		if (value) {
-			this.__setAttributeValueOfElement(el, 'value', value, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_value', value, isRefresh);
+			this._setAttributeValue(el, 'value', value, isRefresh);
+			this._setAttributeValue(el, 'data-pass_value', value, isRefresh);
 		}
 
 		if (prefix) {
-			this.__setAttributeValueOfElement(el, 'name', prefix + el.getAttribute('name'), isRefresh, true);
-			this.__setAttributeValueOfElement(el, 'data-fetch_name', prefix + el.getAttribute('data-fetch_name'), isRefresh, true);
-			this.__setAttributeValueOfElement(el, 'data-pass_prefix', prefix, isRefresh);
+			this._setAttributeValue(el, 'name', prefix + el.getAttribute('name'), isRefresh, true);
+			this._setAttributeValue(el, 'data-fetch_name', prefix + el.getAttribute('data-fetch_name'), isRefresh, true);
+			this._setAttributeValue(el, 'data-pass_prefix', prefix, isRefresh);
 		}
 
 		if (filter_name) {
-			this.__setAttributeValueOfElement(el, 'data-filter_name', filter_name, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_filter_name', filter_name, isRefresh);
+			this._setAttributeValue(el, 'data-filter_name', filter_name, isRefresh);
+			this._setAttributeValue(el, 'data-pass_filter_name', filter_name, isRefresh);
 		}
 
 		if (filter_value) {
-			this.__setAttributeValueOfElement(el, 'data-filter_value', filter_value, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_filter_value', filter_value, isRefresh);
+			this._setAttributeValue(el, 'data-filter_value', filter_value, isRefresh);
+			this._setAttributeValue(el, 'data-pass_filter_value', filter_value, isRefresh);
 		}
 	},
 
-	__setAttributeValueOfElement: function(el, attrname, value, isRefresh, onlyHas) {
+	_setAttributeValue: function(el, attrname, value, isRefresh, onlyHas) {
 		if (value) {
 			if (el.hasAttribute(attrname) && onlyHas) {
 				el.setAttribute(attrname, value);
@@ -94,7 +94,32 @@ const CoCreatePassAttributes = {
 		}
 	},
 
-	__getPassAttributes: function(element) {
+	setPassAttributes: function(element) {
+		let dataParams = [];
+		const self = this;
+		let param = this._getPassAttributes(element);
+
+		if (element.hasAttribute('data-actions')) {
+			return;
+		}
+
+		if (param.pass_to) {
+			dataParams.push(param);
+		}
+
+		let elements = element.querySelectorAll('[data-pass_to]');
+
+		elements.forEach((el) => {
+			let passParam = self._getPassAttributes(el)
+			if (passParam.pass_to) {
+				dataParams.push(passParam);
+			}
+			self._getPassId(passParam)
+		})
+		if (dataParams.length > 0) localStorage.setItem('dataParams', JSON.stringify(dataParams));
+	},
+	
+	_getPassAttributes: function(element) {
 		return {
 			collection: element.getAttribute('data-pass_collection') || element.getAttribute('data-pass_fetch_collection'),
 			document_id: element.getAttribute('data-pass_document_id'),
@@ -106,37 +131,12 @@ const CoCreatePassAttributes = {
 			prefix: element.getAttribute('data-pass_prefix') || ""
 		}
 	},
-
-	storePassData: function(aTag) {
-		let dataParams = [];
-		const self = this;
-		let param = this.__getPassAttributes(aTag);
-
-		if (aTag.hasAttribute('data-actions')) {
-			return;
-		}
-
-		if (param.pass_to) {
-			dataParams.push(param);
-		}
-
-		let tags = aTag.querySelectorAll('[data-pass_to]');
-
-		tags.forEach((tag) => {
-			let passParam = self.__getPassAttributes(tag)
-			if (passParam.pass_to) {
-				dataParams.push(passParam);
-			}
-			self.getPassId(passParam)
-		})
-		if (dataParams.length > 0) localStorage.setItem('dataParams', JSON.stringify(dataParams));
-	},
 	
-	getPassId: function(passParam) {
+	_getPassId: function(passParam) {
 	    let pass_to = passParam.pass_to
 	    const elements = document.querySelectorAll(`[data-pass_id="${pass_to}"]`)
 		for (let element of elements)
-        this.setPassAttributes(element, passParam);
+        this._setAttributeValues(element, passParam);
 	}
 }
 

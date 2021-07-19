@@ -52,8 +52,8 @@ const CoCreateLogic = {
 		if (id) {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
-				self.passAttributes.__setAttributeValueOfElement(el, 'data-document_id', id);
-				self.passAttributes.__setAttributeValueOfElement(el, 'data-filter_value', id);
+				self.passAttributes._setAttributeValue(el, 'data-document_id', id);
+				self.passAttributes._setAttributeValue(el, 'data-filter_value', id);
 			})
 		}
 	},
@@ -67,13 +67,16 @@ const CoCreateLogic = {
 			if (target.hasAttribute('data-actions')) return;
 			
 			const href = target.getAttribute('href');
-			self.passAttributes.storePassData(target)			
+			self.passAttributes.setPassAttributes(target)			
 
 			if (target.getAttribute('target') === 'modal') {
 				event.preventDefault();
 				if (typeof CoCreate.modal !== 'undefined') {
 					CoCreate.modal.open(target);
 				}
+				else if (href) {
+				self.openAnother(target);
+			}
 			}
 			else if (href) {
 				event.preventDefault();
@@ -83,15 +86,7 @@ const CoCreateLogic = {
 		})
 	},
 
-	// checkOpenModal: function(atag) {
-	// 	if (atag.getAttribute('target') === "modal") {
-	// 		return true;
-	// 	}
-	// 	return false;
-	// },
-	
 	openAnother: function(atag) {
-
 		var href = atag.getAttribute('href');
 		var target = atag.getAttribute('target');
 
