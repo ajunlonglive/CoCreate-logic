@@ -6,8 +6,6 @@ import getValues from "./getValues.js"
 import passValues from "./passValues.js"
 
 
-
-//CoCreate.logic.passValues
 const CoCreateLogic = {
 	attributes: CoCreateAttributes,
 	passAttributes: passAttributes,
@@ -17,9 +15,6 @@ const CoCreateLogic = {
 	init: function() {
 		this.__initKeys(); // will be depreciated
 		this.__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
-		// this.__initPassParams();
-		// this.__initPassValueParams();
-		// this.__initGetValueInput();
 		this.initAtagElement();
 	},
 
@@ -55,48 +50,12 @@ const CoCreateLogic = {
 		if (id) {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
-				self.__setAttributeValueOfElement(el, 'data-document_id', id);
-				self.__setAttributeValueOfElement(el, 'data-filter_value', id);
+				self.passAttributes.__setAttributeValueOfElement(el, 'data-document_id', id);
+				self.passAttributes.__setAttributeValueOfElement(el, 'data-filter_value', id);
 			})
 		}
 	},
 
-
-	// initElement: function(container) {
-	// 	const self = this;
-	// 	let mainContainer = container || document;
-	// 	if (!mainContainer.querySelectorAll) {
-	// 		return;
-	// 	}
-	// 	let elements = mainContainer.querySelectorAll('[data-pass_id]');
-	// 	elements = Array.from(elements);
-	// 	if (mainContainer != document && mainContainer.hasAttribute('data-pass_id')) {
-	// 		elements.push(mainContainer)
-	// 	}
-	// 	let dataParams = window.localStorage.getItem('dataParams');
-	// 	dataParams = JSON.parse(dataParams);
-	// 	if (!dataParams || dataParams.length == 0) return;
-
-	// 	elements.forEach((el) => {
-	// 		if (observer.getInitialized(el)) {
-	// 			return;
-	// 		}
-
-	// 		const pass_id = el.getAttribute('data-pass_id')
-	// 		const paramObj = dataParams.find(x => x.pass_to == pass_id)
-	// 		if (!paramObj) return;
-
-	// 		const { collection, document_id, pass_to, prefix } = paramObj;
-	// 		observer.setInitialized(el)
-
-	// 		if (el.tagName === "FORM" && !el.getAttribute('data-colleciton') && collection) {
-	// 			el.setAttribute('data-colleciton', collection);
-	// 		}
-	// 		self.__setPassAttributes(el, paramObj);
-
-
-	// 	});
-	// },
 
 	initAtagElement: function() {
 		const self = this;
@@ -124,154 +83,13 @@ const CoCreateLogic = {
 				else {
 					self.passAttributes.storePassData(target)
 					if (pass_to) {
-						self.__initPassParams(pass_to);
+						self.passAttributes.initElement(target);
 					}
 				}
 			}
 
 		})
 	},
-
-	//. passParams
-	__initPassParams: function(pass_to) {
-		var dataParams = window.localStorage.getItem('dataParams');
-		dataParams = JSON.parse(dataParams);
-
-		if (!dataParams || dataParams.length == 0) return;
-		let self = this;
-
-		dataParams.forEach(function(dataParam) {
-			var param_collection = dataParam.collection;
-			var param_document_id = dataParam.document_id;
-			var param_prefix = dataParam.prefix;
-			var param_pass_to = dataParam.pass_to;
-
-			if (pass_to && param_pass_to != pass_to) {
-				return;
-			}
-
-			var forms = document.querySelectorAll('form');
-
-			forms.forEach((form) => {
-				var pass_id = form.getAttribute('data-pass_id');
-				if (pass_id && pass_id == param_pass_to && param_collection && param_collection != "") {
-					if (!form.getAttribute('data-collection')) {
-						form.setAttribute('data-collection', param_collection);
-					}
-				}
-			})
-
-			var allTags = document.querySelectorAll('[data-pass_id]');
-			allTags.forEach((tag) => {
-				var pass_id = tag.getAttribute('data-pass_id');
-				if (pass_id && pass_id == param_pass_to) {
-					self.__setPassAttributes(tag, dataParam)
-				}
-			})
-		})
-	},
-
-
-	__getPassAttributes: function(element) {
-		return {
-			collection: element.getAttribute('data-pass_collection') || element.getAttribute('data-pass_fetch_collection'),
-			document_id: element.getAttribute('data-pass_document_id'),
-			name: element.getAttribute('data-pass_name'),
-			value: element.getAttribute('data-pass_value'),
-			pass_to: element.getAttribute('data-pass_to'),
-			filter_name: element.getAttribute('data-pass_filter_name'),
-			filter_value: element.getAttribute('data-pass_filter_value'),
-			prefix: element.getAttribute('data-pass_prefix') || ""
-		}
-	},
-
-	__setPassAttributes: function(el, param) {
-		const { collection, document_id, name, value, pass_to, filter_name, filter_value, prefix } = param;
-		const pass_id = el.getAttribute('data-pass_id')
-		const isRefresh = el.hasAttribute('data-pass_refresh') ? true : false;
-
-		if (pass_id != pass_to) return;
-
-		if (collection) {
-			this.__setAttributeValueOfElement(el, 'data-collection', collection, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-fetch_collection', collection, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_fetch_collection', collection, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_collection', collection, isRefresh);
-		}
-
-		if (document_id) {
-			this.__setAttributeValueOfElement(el, 'data-document_id', document_id, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-fetch_document_id', document_id, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_fetch_document_id', document_id, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_document_id', document_id, isRefresh);
-		}
-
-		if (name) {
-			this.__setAttributeValueOfElement(el, 'name', name, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-fetch_name', name, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_name', name, isRefresh);
-		}
-
-		if (value) {
-			this.__setAttributeValueOfElement(el, 'value', value, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_value', value, isRefresh);
-		}
-
-		if (prefix) {
-			this.__setAttributeValueOfElement(el, 'name', prefix + el.getAttribute('name'), isRefresh, true);
-			this.__setAttributeValueOfElement(el, 'data-fetch_name', prefix + el.getAttribute('data-fetch_name'), isRefresh, true);
-			this.__setAttributeValueOfElement(el, 'data-pass_prefix', prefix, isRefresh);
-		}
-
-		if (filter_name) {
-			this.__setAttributeValueOfElement(el, 'data-filter_name', filter_name, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_filter_name', filter_name, isRefresh);
-		}
-
-		if (filter_value) {
-			this.__setAttributeValueOfElement(el, 'data-filter_value', filter_value, isRefresh);
-			this.__setAttributeValueOfElement(el, 'data-pass_filter_value', filter_value, isRefresh);
-		}
-	},
-
-	__setAttributeValueOfElement: function(el, attrname, value, isRefresh, onlyHas) {
-		if (value) {
-			if (el.hasAttribute(attrname) && onlyHas) {
-				el.setAttribute(attrname, value);
-				return;
-			}
-			if (el.hasAttribute(attrname) && (!el.getAttribute(attrname) || isRefresh)) {
-				el.setAttribute(attrname, value);
-				return
-			}
-		}
-	},
-
-	//. storePassData
-	storePassData: function(aTag) {
-		let dataParams = [];
-		const self = this;
-		let param = this.__getPassAttributes(aTag);
-
-		if (aTag.hasAttribute('data-actions')) {
-			return;
-		}
-
-		if (param.pass_to) {
-			dataParams.push(param);
-		}
-
-		let tags = aTag.querySelectorAll('[data-pass_to]');
-
-		tags.forEach((tag) => {
-			let passParam = self.__getPassAttributes(tag)
-			if (passParam.pass_to) {
-				dataParams.push(passParam);
-			}
-		})
-		if (dataParams.length > 0) localStorage.setItem('dataParams', JSON.stringify(dataParams));
-	},
-
 
 	//. openAnother
 	openAnother: function(atag) {
@@ -298,7 +116,7 @@ const CoCreateLogic = {
 		}
 		const pass_to = aTag.getAttribute('data-pass_to');
 		const href = aTag.getAttribute('href');
-		this.storePassData(aTag);
+		this.passAttributes.storePassData(aTag);
 		if (this.checkOpenCocreateModal(aTag)) {
 			if (typeof CoCreate.modal !== 'undefined') {
 				CoCreate.modal.open(aTag);
@@ -308,7 +126,7 @@ const CoCreateLogic = {
 			this.openAnother(aTag);
 		}
 		else if (pass_to) {
-			this.__initPassParams(pass_to);
+			this.passAttributes.initElement(pass_to);
 		}
 	},
 
@@ -347,8 +165,7 @@ observer.init({
 	observe: ['addedNodes'],
 	target: '[data-get_value]',
 	callback: function(mutation) {
-		// CoCreateLogic.__initGetValue(mutation.target)
-		console.log('data-get_value', mutation.target)
+		CoCreateLogic.getValues.initElement(mutation.target)
 	}
 });
 

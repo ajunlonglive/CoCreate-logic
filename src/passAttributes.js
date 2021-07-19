@@ -22,50 +22,7 @@ const CoCreatePassAttributes = {
 
 	},
 
-
-
-
-
-	__initPassParams: function(pass_to) {
-		var dataParams = window.localStorage.getItem('dataParams');
-		dataParams = JSON.parse(dataParams);
-
-		if (!dataParams || dataParams.length == 0) return;
-		let self = this;
-
-		dataParams.forEach(function(dataParam) {
-			var param_collection = dataParam.collection;
-			var param_document_id = dataParam.document_id;
-			var param_prefix = dataParam.prefix;
-			var param_pass_to = dataParam.pass_to;
-
-			if (pass_to && param_pass_to != pass_to) {
-				return;
-			}
-
-			// ToDo: think in this case we only need all tags as we dont care if it is for or not... we only interested in datapass_id
-			var forms = document.querySelectorAll('form');
-
-			forms.forEach((form) => {
-				var pass_id = form.getAttribute('data-pass_id');
-				if (pass_id && pass_id == param_pass_to && param_collection && param_collection != "") {
-					if (!form.getAttribute('data-collection')) {
-						form.setAttribute('data-collection', param_collection);
-					}
-				}
-			})
-
-			var allTags = document.querySelectorAll('[data-pass_id]');
-			allTags.forEach((tag) => {
-				var pass_id = tag.getAttribute('data-pass_id');
-				if (pass_id && pass_id == param_pass_to) {
-					self.setPassAttributes(tag, dataParam)
-				}
-			})
-		})
-	},
-
-	setPassAttributes: function(el, param) {
+	setPassAttributes: function(el, found) {
 		const {
 			collection,
 			document_id,
@@ -75,7 +32,7 @@ const CoCreatePassAttributes = {
 			filter_name,
 			filter_value,
 			prefix
-		} = param;
+		} = found;
 		const pass_id = el.getAttribute('data-pass_id')
 		const isRefresh = el.hasAttribute('data-pass_refresh') ? true : false;
 
