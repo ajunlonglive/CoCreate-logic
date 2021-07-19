@@ -67,7 +67,7 @@ const CoCreateLogic = {
 			if (target.hasAttribute('data-actions')) return;
 			
 			const href = target.getAttribute('href');
-			self.passAttributes.setPassAttributes(target)			
+			self.passAttributes._setPassAttributes(target)			
 
 			if (target.getAttribute('target') === 'modal') {
 				event.preventDefault();
