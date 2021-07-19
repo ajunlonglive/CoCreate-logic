@@ -10,25 +10,33 @@
 </head>
 <body>
 	<!-- windows -->
-  <ul data-get_value="123">t</ul>
-  <ul id="123">12345</ul>
+  <ul data-get_value="123"> </ul>
+  <ul id="123"> hello </ul>
   
   <input id="testing" value="new">
-  
-  <h1 data-get_value="testing"></h1>
+  <h1 data-get_value="testing">new</h1>
+
+
+
+<hr/>
+
+  <input id="testing1" value="new" />
+  <input data-get_value="testing1" />
+  <input data-get_value="testing1" />
+
 
 	
 	<div id="modal-viewport" ></div>
 	
-  <script>
-    var config = {
-      isParent: true,
-      apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
-            organization_Id: '5de0387b12e200ea63204d6c'
-    }
-  </script>
-  
-  <!-- CoCreate JS CDN -->
-  <script src="https://cdn.cocreate.app/logic/latest/CoCreate-logic.min.js" ></script>
+    <script>
+      var config = {
+        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+        organization_Id: '5de0387b12e200ea63204d6c',
+        host: 'ws.cocreate.app'
+      }
+    </script>
+    
+    <!--<script src="../dist/CoCreate-form.js"></script>-->
+    <script src="../../../CoCreateJS/dist/CoCreate.js" ></script>
 </body>
 </html>
