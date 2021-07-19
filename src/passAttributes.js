@@ -18,11 +18,12 @@ const CoCreatePassAttributes = {
 		dataParams = JSON.parse(dataParams);
 		if (!dataParams || dataParams.length == 0) return;
 		let found = dataParams.find(everyItem => everyItem.pass_to == pass_id)
+		if (!found) return;
 		this.setPassAttributes(element, found)
 
 	},
 
-	setPassAttributes: function(el, found) {
+	setPassAttributes: function(el, param) {
 		const {
 			collection,
 			document_id,
@@ -32,7 +33,7 @@ const CoCreatePassAttributes = {
 			filter_name,
 			filter_value,
 			prefix
-		} = found;
+		} = param;
 		const pass_id = el.getAttribute('data-pass_id')
 		const isRefresh = el.hasAttribute('data-pass_refresh') ? true : false;
 
@@ -106,7 +107,6 @@ const CoCreatePassAttributes = {
 		}
 	},
 
-	//. storePassData
 	storePassData: function(aTag) {
 		let dataParams = [];
 		const self = this;
@@ -127,9 +127,17 @@ const CoCreatePassAttributes = {
 			if (passParam.pass_to) {
 				dataParams.push(passParam);
 			}
+			self.getPassId(passParam)
 		})
 		if (dataParams.length > 0) localStorage.setItem('dataParams', JSON.stringify(dataParams));
 	},
+	
+	getPassId: function(passParam) {
+	    let pass_to = passParam.pass_to
+	    const elements = document.querySelectorAll(`[data-pass_id="${pass_to}"]`)
+		for (let element of elements)
+        this.setPassAttributes(element, passParam);
+	}
 }
 
 CoCreatePassAttributes.init();

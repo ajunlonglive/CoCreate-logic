@@ -1,4 +1,3 @@
-
 const CoCreateGetValues = {
 
 	init: function() {
@@ -23,6 +22,10 @@ const CoCreateGetValues = {
 		if (['INPUT', 'TEXTAREA', 'SELECT'].includes(valueEl.tagName)  || valueEl.contentEditable)
 		
 		valueEl.addEventListener('input', (e) => {
+			self.setValueByFind(e.target)
+		})
+		
+		valueEl.addEventListener('updated_by_fetch', (e) => {
 			self.setValueByFind(e.target)
 		})
 

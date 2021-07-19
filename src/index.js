@@ -1,13 +1,15 @@
 import observer from '@cocreate/observer'
 import action from '@cocreate/action'
-import CoCreateAttributes from "./attributes.js"
+// import links from "./links.js"
+import attributes from "./attributes.js"
 import passAttributes from "./passAttributes.js"
 import getValues from "./getValues.js"
 import passValues from "./passValues.js"
 
 
 const CoCreateLogic = {
-	attributes: CoCreateAttributes,
+	// links: links,
+	attributes: attributes,
 	passAttributes: passAttributes,
 	getValues: getValues,
 	passValues: passValues,
@@ -15,7 +17,7 @@ const CoCreateLogic = {
 	init: function() {
 		this.__initKeys(); // will be depreciated
 		this.__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
-		this.initAtagElement();
+		this.initLinks();
 	},
 
 	// ToDo: can be depreciated and handeled by CoCreateJS/core.js
@@ -57,40 +59,39 @@ const CoCreateLogic = {
 	},
 
 
-	initAtagElement: function() {
+	initLinks: function() {
 		const self = this;
 		document.addEventListener('click', function(event) {
-			const target = event.target.closest('a, button')
+			const target = event.target.closest('[href], [target], [data-pass_to]')
 			if (!target) return;
+			if (target.hasAttribute('data-actions')) return;
+			
+			const href = target.getAttribute('href');
+			self.passAttributes.storePassData(target)			
 
 			if (target.getAttribute('target') === 'modal') {
 				event.preventDefault();
-				// event.stopImmediatePropagation()
-				self.setLinkProcess(target);
-				return;
-			}
-
-			const href = target.getAttribute('href');
-			if (target.getAttribute('target') !== 'modal') {
-				if (target.hasAttribute('data-actions')) return;
-				// if (!self.passSubmitProcess(target)) return;
-				const pass_to = target.getAttribute('data-pass_to');
-				if (href) {
-					event.preventDefault();
-					self.passAttributes.storePassData(target)
-					self.openAnother(target)
-				}
-				else {
-					self.passAttributes.storePassData(target)
-					if (pass_to) {
-						self.passAttributes.initElement(target);
+				if (self.checkOpenCocreateModal(target)) {
+					if (typeof CoCreate.modal !== 'undefined') {
+						CoCreate.modal.open(target);
 					}
 				}
+			}
+			else if (href) {
+				event.preventDefault();
+				self.openAnother(target);
 			}
 
 		})
 	},
 
+	checkOpenCocreateModal: function(atag) {
+		if (atag.getAttribute('target') === "modal") {
+			return true;
+		}
+		return false;
+	},
+	
 	//. openAnother
 	openAnother: function(atag) {
 
@@ -106,35 +107,6 @@ const CoCreateLogic = {
 		else {
 			window.open(href, "_self");
 		}
-	},
-
-	//. clickATaginButton
-	setLinkProcess: function(aTag) {
-
-		if (aTag.hasAttribute('data-actions')) {
-			return;
-		}
-		const pass_to = aTag.getAttribute('data-pass_to');
-		const href = aTag.getAttribute('href');
-		this.passAttributes.storePassData(aTag);
-		if (this.checkOpenCocreateModal(aTag)) {
-			if (typeof CoCreate.modal !== 'undefined') {
-				CoCreate.modal.open(aTag);
-			}
-		}
-		else if (href) {
-			this.openAnother(aTag);
-		}
-		else if (pass_to) {
-			this.passAttributes.initElement(pass_to);
-		}
-	},
-
-	checkOpenCocreateModal: function(atag) {
-		if (atag.getAttribute('target') === "modal") {
-			return true;
-		}
-		return false;
 	},
 
 }
