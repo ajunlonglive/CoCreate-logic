@@ -1,7 +1,8 @@
-import observer from '@cocreate/observer'
 import utils from '@cocreate/utils';
 import crud from '@cocreate/crud-client';
+import passAttributes from './passAttributes';
 
+const passAttributesi = passAttributes;
 const CoCreateAttributes = {
 	//. key: colleciton.document_id.name,
 	//. example:  
@@ -189,14 +190,5 @@ const CoCreateAttributes = {
 CoCreateAttributes.init();
 CoCreateAttributes.initElement();
 
-// observer.init({ 
-// 	name: 'CoCreateLogicAttributes', 
-// 	observe: ['addedNodes'],
-// 	target: '[fetch-for]',
-// 	callback: function(mutation) {
-	
-// 			CoCreateAttributes.initElement(mutation.target)
-// 	}
-// });
 
 export default CoCreateAttributes;

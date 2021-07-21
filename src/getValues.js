@@ -1,3 +1,7 @@
+// import passAttributes from './passAttributes';
+
+// const passAttributesi = await passAttributes;
+
 const CoCreateGetValues = {
 
 	init: function() {
@@ -29,9 +33,9 @@ const CoCreateGetValues = {
 			self.setValueByFind(e.target)
 		})
 
-		// element.dispatchEvent(new Event("input", {
-		// 	"bubbles": true
-		// }));
+		element.dispatchEvent(new Event("input", {
+			"bubbles": true
+		}));
 
 	},
 	

@@ -1,37 +1,37 @@
 import observer from '@cocreate/observer'
 import action from '@cocreate/action'
 // import links from "./links.js"
-import attributes from "./attributes.js"
 import passAttributes from "./passAttributes.js"
+import attributes from "./attributes.js"
 import getValues from "./getValues.js"
 import passValues from "./passValues.js"
 
 
 const CoCreateLogic = {
 	// links: links,
+	passValues: passValues,
 	attributes: attributes,
 	passAttributes: passAttributes,
-	getValues: getValues,
-	passValues: passValues,
+	
 
 	init: function() {
-		this.__initKeys(); // will be depreciated
+		// this.__initKeys(); // will be depreciated
 		this.__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
 		this.initLinks();
 	},
 
 	// ToDo: can be depreciated and handeled by CoCreateJS/core.js
-	__initKeys: function() {
-		if (window.localStorage.getItem('apiKey')) {
-			config.apiKey = window.localStorage.getItem('apiKey');
-		}
-		if (window.localStorage.getItem('organization_id')) {
-			config.organization_Id = window.localStorage.getItem('organization_id');
-		}
-		if (window.localStorage.getItem('host')) {
-			config.host = window.localStorage.getItem('host');
-		}
-	},
+	// __initKeys: function() {
+	// 	if (window.localStorage.getItem('apiKey')) {
+	// 		config.apiKey = window.localStorage.getItem('apiKey');
+	// 	}
+	// 	if (window.localStorage.getItem('organization_id')) {
+	// 		config.organization_Id = window.localStorage.getItem('organization_id');
+	// 	}
+	// 	if (window.localStorage.getItem('host')) {
+	// 		config.host = window.localStorage.getItem('host');
+	// 	}
+	// },
 
 	// ToDo: can be depreciateddo to component localStorage
 	__initPassSessionIds: function() {
@@ -100,6 +100,8 @@ const CoCreateLogic = {
 			window.open(href, "_self");
 		}
 	},
+	
+	getValues: getValues,
 
 }
 

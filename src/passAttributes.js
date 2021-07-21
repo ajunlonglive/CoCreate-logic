@@ -105,6 +105,7 @@ const CoCreatePassAttributes = {
 
 		if (attrValues.pass_to) {
 			dataAttributes.push(attrValues);
+			self._getPassId(attrValues)
 		}
 
 		let elements = element.querySelectorAll('[data-pass_to]');
@@ -136,7 +137,7 @@ const CoCreatePassAttributes = {
 	    let pass_to = attrValues.pass_to
 	    const elements = document.querySelectorAll(`[data-pass_id="${pass_to}"]`)
 		for (let element of elements)
-        this._setAttributeValues(element, attrValues);
+        	this._setAttributeValues(element, attrValues);
 	}
 }
 
