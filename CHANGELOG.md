@@ -1,3 +1,14 @@
+## [1.0.24](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.23...v1.0.24) (2021-07-19)
+
+
+### Bug Fixes
+
+* refactor into multiple files ([0ea2632](https://github.com/CoCreate-app/CoCreate-logic/commit/0ea2632ed9b6707b10df78eda53f189616cf12ae))
+* refactored attribute.js ([f2a6831](https://github.com/CoCreate-app/CoCreate-logic/commit/f2a6831d43c29105d7dadb143faafa72629872f3))
+* removed checkOpenModal ([1a3f171](https://github.com/CoCreate-app/CoCreate-logic/commit/1a3f17185b6d70fb6e71556f65df39d0a47563d6))
+* removed commented code ([b92a721](https://github.com/CoCreate-app/CoCreate-logic/commit/b92a721615ea87acc913863d09b5dca317b830c8))
+* update function names ([b31cba6](https://github.com/CoCreate-app/CoCreate-logic/commit/b31cba66504382a695de11209d68d9cc7c588cad))
+
 ## [1.0.23](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.22...v1.0.23) (2021-07-17)
 
 
