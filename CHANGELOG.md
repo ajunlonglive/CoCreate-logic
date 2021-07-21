@@ -1,3 +1,10 @@
+## [1.0.25](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.24...v1.0.25) (2021-07-21)
+
+
+### Bug Fixes
+
+* refactored and removed dead code ([b5221af](https://github.com/CoCreate-app/CoCreate-logic/commit/b5221af46cb0d4f57649a91a8785cd34302e4456))
+
 ## [1.0.24](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.23...v1.0.24) (2021-07-19)
 
 
