@@ -1,3 +1,10 @@
+## [1.0.26](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.25...v1.0.26) (2021-07-22)
+
+
+### Bug Fixes
+
+* update link init, passedValues and passedAttributes ([82a1906](https://github.com/CoCreate-app/CoCreate-logic/commit/82a19061aa03c6c813c1752198f7e2cc1b11cb49))
+
 ## [1.0.25](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.0.24...v1.0.25) (2021-07-21)
 
 
