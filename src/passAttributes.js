@@ -14,11 +14,11 @@ const CoCreatePassAttributes = {
 		let pass_id = element.getAttribute('data-pass_id');
 		if (!pass_id) return;
 
-		let dataAttributes = window.localStorage.getItem('dataAttributes');
-		dataAttributes = JSON.parse(dataAttributes);
-		if (!dataAttributes || dataAttributes.length == 0) return;
+		let passedAttributes = window.localStorage.getItem('passedAttributes');
+		passedAttributes = JSON.parse(passedAttributes);
+		if (!passedAttributes || passedAttributes.length == 0) return;
 		
-		let attrValues = dataAttributes.find(everyItem => everyItem.pass_to == pass_id)
+		let attrValues = passedAttributes.find(everyItem => everyItem.pass_to == pass_id)
 		if (!attrValues) return;
 		this._setAttributeValues(element, attrValues)
 	},
@@ -95,7 +95,7 @@ const CoCreatePassAttributes = {
 	},
 
 	_setPassAttributes: function(element) {
-		let dataAttributes = [];
+		let passedAttributes = [];
 		const self = this;
 		let attrValues = this._getPassAttributes(element);
 
@@ -104,7 +104,7 @@ const CoCreatePassAttributes = {
 		}
 
 		if (attrValues.pass_to) {
-			dataAttributes.push(attrValues);
+			passedAttributes.push(attrValues);
 			self._getPassId(attrValues)
 		}
 
@@ -113,11 +113,11 @@ const CoCreatePassAttributes = {
 		elements.forEach((el) => {
 			let attrValues = self._getPassAttributes(el)
 			if (attrValues.pass_to) {
-				dataAttributes.push(attrValues);
+				passedAttributes.push(attrValues);
 			}
 			self._getPassId(attrValues)
 		})
-		if (dataAttributes.length > 0) localStorage.setItem('dataAttributes', JSON.stringify(dataAttributes));
+		if (passedAttributes.length > 0) localStorage.setItem('passedAttributes', JSON.stringify(passedAttributes));
 	},
 	
 	_getPassAttributes: function(element) {

@@ -15,10 +15,10 @@ const CoCreatePassValues = {
 
 		if(!pass_value_id) return;
 		
-		let valueParams = window.localStorage.getItem('valueParams');
-		valueParams = JSON.parse(valueParams );
-		if (!valueParams || valueParams.length == 0) return;
-	        let found = valueParams.find(everyItem => everyItem.pass_value_to == pass_value_id)
+		let passedValues = window.localStorage.getItem('passedValues');
+		passedValues = JSON.parse(passedValues );
+		if (!passedValues || passedValues.length == 0) return;
+	        let found = passedValues.find(everyItem => everyItem.pass_value_to == pass_value_id)
 			if (['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName)) 
 				element.value = found.value;
 			else 
@@ -30,7 +30,7 @@ const CoCreatePassValues = {
 		if (!form) return;
 
 		let elements = form.querySelectorAll('[data-pass_value_to]');
-		let valueParams = [];
+		let passedValues = [];
 
 		elements.forEach(el => {
 			const pass_value_to = el.getAttribute('data-pass_value_to');
@@ -45,15 +45,15 @@ const CoCreatePassValues = {
 					value = el.innerHTML;
 				}
 
-				valueParams.push({
+				passedValues.push({
 					pass_value_to: pass_value_to,
 					value: value
 				})
 			}
 		})
 
-		if (valueParams.length > 0) {
-			window.localStorage.setItem('valueParams', JSON.stringify(valueParams));
+		if (passedValues.length > 0) {
+			window.localStorage.setItem('passedValues', JSON.stringify(passedValues));
 		}
 
 		this.init()
@@ -65,7 +65,7 @@ const CoCreatePassValues = {
 	},
 
 	initDataPassValues: function() {
-		window.localStorage.removeItem('valueParams');
+		window.localStorage.removeItem('passedValues');
 	},
 }
 

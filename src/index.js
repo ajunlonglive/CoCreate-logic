@@ -1,6 +1,5 @@
 import observer from '@cocreate/observer'
 import action from '@cocreate/action'
-// import links from "./links.js"
 import passAttributes from "./passAttributes.js"
 import attributes from "./attributes.js"
 import getValues from "./getValues.js"
@@ -8,32 +7,17 @@ import passValues from "./passValues.js"
 
 
 const CoCreateLogic = {
-	// links: links,
-	passValues: passValues,
-	attributes: attributes,
 	passAttributes: passAttributes,
-	
+	attributes: attributes,
+	passValues: passValues,
+	getValues: getValues,
 
 	init: function() {
-		// this.__initKeys(); // will be depreciated
 		this.__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
 		this.initLinks();
 	},
 
-	// ToDo: can be depreciated and handeled by CoCreateJS/core.js
-	// __initKeys: function() {
-	// 	if (window.localStorage.getItem('apiKey')) {
-	// 		config.apiKey = window.localStorage.getItem('apiKey');
-	// 	}
-	// 	if (window.localStorage.getItem('organization_id')) {
-	// 		config.organization_Id = window.localStorage.getItem('organization_id');
-	// 	}
-	// 	if (window.localStorage.getItem('host')) {
-	// 		config.host = window.localStorage.getItem('host');
-	// 	}
-	// },
-
-	// ToDo: can be depreciateddo to component localStorage
+	// ToDo: can be depreciated do to component localStorage
 	__initPassSessionIds: function() {
 		let orgId = window.localStorage.getItem('organization_id');
 		let user_id = window.localStorage.getItem('user_id');
@@ -65,30 +49,34 @@ const CoCreateLogic = {
 			const target = event.target.closest('[href], [target], [data-pass_to]')
 			if (!target) return;
 			if (target.hasAttribute('data-actions')) return;
-			
-			const href = target.getAttribute('href');
-			self.passAttributes._setPassAttributes(target)			
-
-			if (target.getAttribute('target') === 'modal') {
-				event.preventDefault();
-				if (typeof CoCreate.modal !== 'undefined') {
-					CoCreate.modal.open(target);
-				}
-				else if (href) {
-				self.openAnother(target);
-			}
-			}
-			else if (href) {
-				event.preventDefault();
-				self.openAnother(target);
-			}
-
+			self.runLink(target)
 		})
 	},
+	
+	runLink: function(target) {
+		const self = this;
+		const href = target.getAttribute('href');
+		self.passAttributes._setPassAttributes(target)			
 
-	openAnother: function(atag) {
-		var href = atag.getAttribute('href');
-		var target = atag.getAttribute('target');
+		if (target.getAttribute('target') === 'modal') {
+			event.preventDefault();
+			if (typeof CoCreate.modal !== 'undefined') {
+				CoCreate.modal.open(target);
+			}
+			else if (href) {
+			self.openLink(target);
+		}
+		}
+		else if (href) {
+			event.preventDefault();
+			self.openLink(target);
+		}
+
+	},
+	
+	openLink: function(link) {
+		var href = link.getAttribute('href');
+		var target = link.getAttribute('target');
 
 		if (target == "_blank") {
 			window.open(href, "_blank");
@@ -101,8 +89,6 @@ const CoCreateLogic = {
 		}
 	},
 	
-	getValues: getValues,
-
 }
 
 
