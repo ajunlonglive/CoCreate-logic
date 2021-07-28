@@ -1,7 +1,7 @@
 const CoCreatePassAttributes = {
 
 	init: function() {
-		var elements = document.querySelectorAll('[data-pass_id]');
+		var elements = document.querySelectorAll('[pass_id]');
 		this.initElements(elements)
 	},
 
@@ -11,7 +11,7 @@ const CoCreatePassAttributes = {
 	},
 
 	initElement: function(element) {
-		let pass_id = element.getAttribute('data-pass_id');
+		let pass_id = element.getAttribute('pass_id');
 		if (!pass_id) return;
 
 		let passedAttributes = window.localStorage.getItem('passedAttributes');
@@ -34,50 +34,50 @@ const CoCreatePassAttributes = {
 			filter_value,
 			prefix
 		} = attrValues;
-		const pass_id = el.getAttribute('data-pass_id')
-		const isRefresh = el.hasAttribute('data-pass_refresh') ? true : false;
+		const pass_id = el.getAttribute('pass_id')
+		const isRefresh = el.hasAttribute('pass-refresh') ? true : false;
 
 		if (pass_id != pass_to) return;
 
 		if (collection) {
 			this._setAttributeValue(el, 'collection', collection, isRefresh);
-			this._setAttributeValue(el, 'data-fetch_collection', collection, isRefresh);
-			this._setAttributeValue(el, 'data-pass_fetch_collection', collection, isRefresh);
-			this._setAttributeValue(el, 'data-pass_collection', collection, isRefresh);
+			this._setAttributeValue(el, 'fetch-collection', collection, isRefresh);
+			this._setAttributeValue(el, 'pass-fetch_collection', collection, isRefresh);
+			this._setAttributeValue(el, 'pass-collection', collection, isRefresh);
 		}
 
 		if (document_id) {
 			this._setAttributeValue(el, 'document_id', document_id, isRefresh);
-			this._setAttributeValue(el, 'data-fetch_document_id', document_id, isRefresh);
-			this._setAttributeValue(el, 'data-pass_fetch_document_id', document_id, isRefresh);
-			this._setAttributeValue(el, 'data-pass_document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'fetch-document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'pass-fetch_document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'pass-document_id', document_id, isRefresh);
 		}
 
 		if (name) {
 			this._setAttributeValue(el, 'name', name, isRefresh);
-			this._setAttributeValue(el, 'data-fetch_name', name, isRefresh);
-			this._setAttributeValue(el, 'data-pass_name', name, isRefresh);
+			this._setAttributeValue(el, 'fetch-name', name, isRefresh);
+			this._setAttributeValue(el, 'pass-name', name, isRefresh);
 		}
 
 		if (value) {
 			this._setAttributeValue(el, 'value', value, isRefresh);
-			this._setAttributeValue(el, 'data-pass_value', value, isRefresh);
+			this._setAttributeValue(el, 'pass-value', value, isRefresh);
 		}
 
 		if (prefix) {
 			this._setAttributeValue(el, 'name', prefix + el.getAttribute('name'), isRefresh, true);
-			this._setAttributeValue(el, 'data-fetch_name', prefix + el.getAttribute('data-fetch_name'), isRefresh, true);
-			this._setAttributeValue(el, 'data-pass_prefix', prefix, isRefresh);
+			this._setAttributeValue(el, 'fetch-name', prefix + el.getAttribute('fetch-name'), isRefresh, true);
+			this._setAttributeValue(el, 'pass-prefix', prefix, isRefresh);
 		}
 
 		if (filter_name) {
-			this._setAttributeValue(el, 'data-filter_name', filter_name, isRefresh);
-			this._setAttributeValue(el, 'data-pass_filter_name', filter_name, isRefresh);
+			this._setAttributeValue(el, 'filter-name', filter_name, isRefresh);
+			this._setAttributeValue(el, 'pass-filter-name', filter_name, isRefresh);
 		}
 
 		if (filter_value) {
-			this._setAttributeValue(el, 'data-filter_value', filter_value, isRefresh);
-			this._setAttributeValue(el, 'data-pass_filter_value', filter_value, isRefresh);
+			this._setAttributeValue(el, 'filter-value', filter_value, isRefresh);
+			this._setAttributeValue(el, 'pass-filter-value', filter_value, isRefresh);
 		}
 	},
 
@@ -99,7 +99,7 @@ const CoCreatePassAttributes = {
 		const self = this;
 		let attrValues = this._getPassAttributes(element);
 
-		if (element.hasAttribute('data-actions')) {
+		if (element.hasAttribute('actions')) {
 			return;
 		}
 
@@ -108,7 +108,7 @@ const CoCreatePassAttributes = {
 			self._getPassId(attrValues)
 		}
 
-		let elements = element.querySelectorAll('[data-pass_to]');
+		let elements = element.querySelectorAll('[pass_to]');
 
 		elements.forEach((el) => {
 			let attrValues = self._getPassAttributes(el)
@@ -122,20 +122,20 @@ const CoCreatePassAttributes = {
 	
 	_getPassAttributes: function(element) {
 		return {
-			collection: element.getAttribute('data-pass_collection') || element.getAttribute('data-pass_fetch_collection'),
-			document_id: element.getAttribute('data-pass_document_id'),
-			name: element.getAttribute('data-pass_name'),
-			value: element.getAttribute('data-pass_value'),
-			pass_to: element.getAttribute('data-pass_to'),
-			filter_name: element.getAttribute('data-pass_filter_name'),
-			filter_value: element.getAttribute('data-pass_filter_value'),
-			prefix: element.getAttribute('data-pass_prefix') || ""
+			collection: element.getAttribute('pass-collection') || element.getAttribute('pass-fetch_collection'),
+			document_id: element.getAttribute('pass-document_id'),
+			name: element.getAttribute('pass-name'),
+			value: element.getAttribute('pass-value'),
+			pass_to: element.getAttribute('pass_to'),
+			filter_name: element.getAttribute('pass-filter-name'),
+			filter_value: element.getAttribute('pass-filter-value'),
+			prefix: element.getAttribute('pass-prefix') || ""
 		}
 	},
 	
 	_getPassId: function(attrValues) {
 	    let pass_to = attrValues.pass_to
-	    const elements = document.querySelectorAll(`[data-pass_id="${pass_to}"]`)
+	    const elements = document.querySelectorAll(`[pass_id="${pass_to}"]`)
 		for (let element of elements)
         	this._setAttributeValues(element, attrValues);
 	}

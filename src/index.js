@@ -37,7 +37,7 @@ const CoCreateLogic = {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
 				self.passAttributes._setAttributeValue(el, 'document_id', id);
-				self.passAttributes._setAttributeValue(el, 'data-filter_value', id);
+				self.passAttributes._setAttributeValue(el, 'filter-value', id);
 			})
 		}
 	},
@@ -46,9 +46,9 @@ const CoCreateLogic = {
 	initLinks: function() {
 		const self = this;
 		document.addEventListener('click', function(event) {
-			const target = event.target.closest('[href], [target], [data-pass_to]')
+			const target = event.target.closest('[href], [target], [pass_to]')
 			if (!target) return;
-			if (target.hasAttribute('data-actions')) return;
+			if (target.hasAttribute('actions')) return;
 			self.runLink(target)
 		})
 	},
@@ -106,7 +106,7 @@ observer.init({
 observer.init({
 	name: 'CoCreateLogic',
 	observe: ['addedNodes'],
-	target: '[data-pass_id]',
+	target: '[pass_id]',
 	callback: function(mutation) {
 		CoCreateLogic.passAttributes.initElement(mutation.target)
 	}

@@ -107,8 +107,8 @@ const CoCreateAttributes = {
 					let name = jsonInfo['name'] || el_name;
 					let value = jsonInfo['value'] || el_value;
 					
-					if (jsonInfo['data-pass_id']) {
-						let pass_info = self.__checkPassId(jsonInfo['data-pass_id']);
+					if (jsonInfo['pass_id']) {
+						let pass_info = self.__checkPassId(jsonInfo['pass_id']);
 						if (pass_info) {
 							collection = pass_info.collection;
 							document_id = pass_info.document_id;

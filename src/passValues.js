@@ -1,7 +1,7 @@
 const CoCreatePassValues = {
 
 	init: function() {
-		var elements = document.querySelectorAll('[data-pass_value_id]');
+		var elements = document.querySelectorAll('[pass-value_id]');
 		this.initElements(elements)
 	},
 
@@ -11,7 +11,7 @@ const CoCreatePassValues = {
 	},
 
 	initElement: function(element) {
-		let pass_value_id = element.getAttribute('data-pass_value_id');
+		let pass_value_id = element.getAttribute('pass-value_id');
 
 		if(!pass_value_id) return;
 		
@@ -29,11 +29,11 @@ const CoCreatePassValues = {
 		let form = btn.closest('form')
 		if (!form) return;
 
-		let elements = form.querySelectorAll('[data-pass_value_to]');
+		let elements = form.querySelectorAll('[pass-value_to]');
 		let passedValues = [];
 
 		elements.forEach(el => {
-			const pass_value_to = el.getAttribute('data-pass_value_to');
+			const pass_value_to = el.getAttribute('pass-value_to');
 
 			let value;
 
