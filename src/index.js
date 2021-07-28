@@ -36,7 +36,7 @@ const CoCreateLogic = {
 		if (id) {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
-				self.passAttributes._setAttributeValue(el, 'data-document_id', id);
+				self.passAttributes._setAttributeValue(el, 'document_id', id);
 				self.passAttributes._setAttributeValue(el, 'data-filter_value', id);
 			})
 		}

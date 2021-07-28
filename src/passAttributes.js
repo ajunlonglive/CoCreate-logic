@@ -40,14 +40,14 @@ const CoCreatePassAttributes = {
 		if (pass_id != pass_to) return;
 
 		if (collection) {
-			this._setAttributeValue(el, 'data-collection', collection, isRefresh);
+			this._setAttributeValue(el, 'collection', collection, isRefresh);
 			this._setAttributeValue(el, 'data-fetch_collection', collection, isRefresh);
 			this._setAttributeValue(el, 'data-pass_fetch_collection', collection, isRefresh);
 			this._setAttributeValue(el, 'data-pass_collection', collection, isRefresh);
 		}
 
 		if (document_id) {
-			this._setAttributeValue(el, 'data-document_id', document_id, isRefresh);
+			this._setAttributeValue(el, 'document_id', document_id, isRefresh);
 			this._setAttributeValue(el, 'data-fetch_document_id', document_id, isRefresh);
 			this._setAttributeValue(el, 'data-pass_fetch_document_id', document_id, isRefresh);
 			this._setAttributeValue(el, 'data-pass_document_id', document_id, isRefresh);

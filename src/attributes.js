@@ -62,7 +62,7 @@ const CoCreateAttributes = {
 					}
 					item.el.setAttribute(item.attr, attr_value);
 					
-					// if (item.attr == 'data-collection') {
+					// if (item.attr == 'collection') {
 					// 	runInitModule('cocreate-text');						
 					// } 
 					
@@ -92,8 +92,8 @@ const CoCreateAttributes = {
 
 		elements.forEach((el) => {
 			//. check
-			const el_collection = el.getAttribute('data-collection')
-			const el_documentId = el.getAttribute('data-document_id')
+			const el_collection = el.getAttribute('collection')
+			const el_documentId = el.getAttribute('document_id')
 			const el_name = el.getAttribute('name')
 			const el_value = el.getAttribute('value')
 			

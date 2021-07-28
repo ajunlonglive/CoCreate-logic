@@ -13,30 +13,30 @@
     <body>
 
         <div style="padding: 20px">
-            <form data-collection="apples" class="mbottom-75">
+            <form collection="apples" class="mbottom-75">
                 
                 <!--ToDo: Maybe the future of attribute fetch-->
                 <!--<div href='{files.{{data._id}}.path"}'></div>-->
                 
                 <!-- usecase 1: process to get value-->
                 <input fetch-for data-test_1='../testing/{ "collection":"apples", "document_id":"5fe9e0a11b4a703e71c51ba8", "name":"name" }' 
-                    data-test_2='{ "collection":"modules", "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }' type="text" data-collection="modules"
-                    data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123">
+                    data-test_2='{ "collection":"modules", "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }' type="text" collection="modules"
+                    realtime="true" document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123">
                 <input fetch-for data-test_1='../testing/{ "collection":"apples", "document_id":"5fe9e0a11b4a703e71c51ba8", "name":"name" }' 
-                    data-test_2='{ "collection":"modules", "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }' type="text" data-collection="modules"
-                    data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123">
+                    data-test_2='{ "collection":"modules", "document_id":"5ebc16fc8917bc59483a7e3b", "name":"nameOtro123" }' type="text" collection="modules"
+                    realtime="true" document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123">
                 
                 <!-- usecase 2: only name exists will get collcecton and document_id from element-->
-                <input fetch-for data-test_2='{ "name":"name" }' type="text" data-collection="apples" data-realtime="true" data-document_id="5fe9e0a11b4a703e71c51ba8" name="nameOtro123" data-pass_id="1234">
+                <input fetch-for data-test_2='{ "name":"name" }' type="text" collection="apples" realtime="true" document_id="5fe9e0a11b4a703e71c51ba8" name="nameOtro123" data-pass_id="1234">
 
                 <!-- usecase 3: only document_id and name exists will get collcecton from element-->
-                <textarea fetch-for data-test_3='{ "document_id":"5fe9e0a11b4a703e71c51ba8", "name":"nametest1" }' data-collection="apples" data-realtime="true" data-document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123" rows="10"></textarea>
+                <textarea fetch-for data-test_3='{ "document_id":"5fe9e0a11b4a703e71c51ba8", "name":"nametest1" }' collection="apples" realtime="true" document_id="5ebc16fc8917bc59483a7e3b" name="nameOtro123" rows="10"></textarea>
 
                 <!-- usecase 4: only collection and name exists will get document_id from element-->
-                <textarea fetch-for data-test_4='{"name":"name" }' data-collection="apples" data-realtime="true" data-document_id="5fe9e0a11b4a703e71c51ba8" name="nameOtro123" rows="10"></textarea>
+                <textarea fetch-for data-test_4='{"name":"name" }' collection="apples" realtime="true" document_id="5fe9e0a11b4a703e71c51ba8" name="nameOtro123" rows="10"></textarea>
 
                 <!-- usecase 5: using data-pass_id to get collcecton and document_id -->
-                <textarea fetch-for data-co='{"data-pass_id":"1234", "name":"name" }' data-pass_id="1234" data-realtime="true" data-document_id="5fe9e0a11b4a703e71c51ba8" data-collection="apples" name="nameOtro123" rows="10"></textarea>
+                <textarea fetch-for data-co='{"data-pass_id":"1234", "name":"name" }' data-pass_id="1234" realtime="true" document_id="5fe9e0a11b4a703e71c51ba8" collection="apples" name="nameOtro123" rows="10"></textarea>
             </form>
         </div>
 
