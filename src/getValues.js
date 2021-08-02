@@ -5,7 +5,7 @@
 const CoCreateGetValues = {
 
 	init: function() {
-		var elements = document.querySelectorAll('[data-get_value]');
+		var elements = document.querySelectorAll('[get-value]');
 		this.initElements(elements)
 	},
 
@@ -16,7 +16,7 @@ const CoCreateGetValues = {
 
 	initElement: function(element) {
 
-	    let id = element.getAttribute('data-get_value')
+	    let id = element.getAttribute('get-value')
 		let valueEl = document.getElementById(id);
 		if(!valueEl) return;
 		this.setValue(valueEl, element)
@@ -42,7 +42,7 @@ const CoCreateGetValues = {
 	setValueByFind: function setValue(valueEl){
 	    let id = valueEl.getAttribute('id')
 	    if(!id) return;
-		var elements = document.querySelectorAll('[data-get_value="' + id + '"]');
+		var elements = document.querySelectorAll('[get-value="' + id + '"]');
 		for(let element of elements)
 			this.setValue(valueEl, element)
 

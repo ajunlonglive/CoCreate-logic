@@ -115,7 +115,7 @@ observer.init({
 observer.init({
 	name: 'CoCreateLogic',
 	observe: ['addedNodes'],
-	target: '[data-get_value]',
+	target: '[get-value]',
 	callback: function(mutation) {
 		CoCreateLogic.getValues.initElement(mutation.target)
 	}
