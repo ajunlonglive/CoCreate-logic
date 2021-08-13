@@ -99,9 +99,9 @@ const CoCreatePassAttributes = {
 		const self = this;
 		let attrValues = this._getPassAttributes(element);
 
-		if (element.hasAttribute('actions')) {
-			return;
-		}
+		// if (element.hasAttribute('actions')) {
+		// 	return;
+		// }
 
 		if (attrValues.pass_to) {
 			passedAttributes.push(attrValues);
