@@ -49,6 +49,7 @@ const CoCreateLogic = {
 			const target = event.target.closest('[href], [target], [pass_to]')
 			if (!target) return;
 			if (target.hasAttribute('actions')) return;
+			if (target.closest('[actions]')) return;
 			self.runLink(target)
 		})
 	},
