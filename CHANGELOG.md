@@ -1,3 +1,12 @@
+## [1.1.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.2...v1.1.3) (2021-08-14)
+
+
+### Bug Fixes
+
+* improved href logic ([dd86504](https://github.com/CoCreate-app/CoCreate-logic/commit/dd865045acc687a31c8d37d932608e064ee34a13))
+* passAttributes returned if attribute action existed ([8564fe2](https://github.com/CoCreate-app/CoCreate-logic/commit/8564fe223e6d58c6a095dca7d1d7b47da70ea68b))
+* update to  docs ([2f93708](https://github.com/CoCreate-app/CoCreate-logic/commit/2f937080643a9f69d52a7bec64cbaf5bb0b0cd11))
+
 ## [1.1.2](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.1...v1.1.2) (2021-08-02)
 
 
