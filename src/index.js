@@ -1,9 +1,9 @@
-import observer from '@cocreate/observer'
-import action from '@cocreate/action'
-import passAttributes from "./passAttributes.js"
-import attributes from "./attributes.js"
-import getValues from "./getValues.js"
-import passValues from "./passValues.js"
+import observer from '@cocreate/observer';
+import action from '@cocreate/action';
+import passAttributes from "./passAttributes.js";
+import attributes from "./attributes.js";
+import getValues from "./getValues.js";
+import passValues from "./passValues.js";
 
 
 const CoCreateLogic = {
@@ -38,7 +38,7 @@ const CoCreateLogic = {
 			elements.forEach(el => {
 				self.passAttributes._setAttributeValue(el, 'document_id', id);
 				self.passAttributes._setAttributeValue(el, 'filter-value', id);
-			})
+			});
 		}
 	},
 
@@ -46,18 +46,19 @@ const CoCreateLogic = {
 	initLinks: function() {
 		const self = this;
 		document.addEventListener('click', function(event) {
-			const target = event.target.closest('[href], [target], [pass_to]')
+			const target = event.target.closest('[href], [target], [pass_to]');
 			if (!target) return;
 			if (target.hasAttribute('actions')) return;
 			if (target.closest('[actions]')) return;
-			self.runLink(target)
-		})
+			self.runLink(target);
+		});
 	},
 	
 	runLink: function(target) {
 		const self = this;
+		if (!target) return;
 		const href = target.getAttribute('href');
-		self.passAttributes._setPassAttributes(target)			
+		self.passAttributes._setPassAttributes(target);			
 
 		if (target.getAttribute('target') === 'modal') {
 			event.preventDefault();
@@ -90,7 +91,7 @@ const CoCreateLogic = {
 		}
 	},
 	
-}
+};
 
 
 CoCreateLogic.init();
@@ -100,7 +101,7 @@ observer.init({
 	observe: ['addedNodes'],
 	target: '[fetch-for]',
 	callback: function(mutation) {
-		CoCreateLogic.attributes.initElement(mutation.target)
+		CoCreateLogic.attributes.initElement(mutation.target);
 	}
 });
 
@@ -109,7 +110,7 @@ observer.init({
 	observe: ['addedNodes'],
 	target: '[pass_id]',
 	callback: function(mutation) {
-		CoCreateLogic.passAttributes.initElement(mutation.target)
+		CoCreateLogic.passAttributes.initElement(mutation.target);
 	}
 });
 
@@ -118,7 +119,7 @@ observer.init({
 	observe: ['addedNodes'],
 	target: '[get-value]',
 	callback: function(mutation) {
-		CoCreateLogic.getValues.initElement(mutation.target)
+		CoCreateLogic.getValues.initElement(mutation.target);
 	}
 });
 
@@ -126,8 +127,8 @@ action.init({
 	action: "passValueAction",
 	endEvent: "passValueActionEnd",
 	callback: (btn, data) => {
-		CoCreateLogic.passValues.passValueAction(btn)
+		CoCreateLogic.passValues.passValueAction(btn);
 	},
-})
+});
 
 export default CoCreateLogic;
