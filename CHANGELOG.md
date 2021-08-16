@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.3...v1.1.4) (2021-08-16)
+
+
+### Bug Fixes
+
+* if link is null return ([ee59e86](https://github.com/CoCreate-app/CoCreate-logic/commit/ee59e86a31d0662ba032e9ca1dcecede0ff4e5e4))
+
 ## [1.1.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.2...v1.1.3) (2021-08-14)
 
 
