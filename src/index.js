@@ -37,6 +37,7 @@ const CoCreateLogic = {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
 				self.passAttributes._setAttributeValue(el, 'document_id', id);
+				self.passAttributes._setAttributeValue(el, 'fetch-document_id', id);
 				self.passAttributes._setAttributeValue(el, 'filter-value', id);
 			});
 		}
