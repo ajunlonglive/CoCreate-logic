@@ -1,3 +1,11 @@
+## [1.1.7](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.6...v1.1.7) (2021-08-22)
+
+
+### Bug Fixes
+
+* removed data- from main-content, clone, filter-value_type ([a6a79f5](https://github.com/CoCreate-app/CoCreate-logic/commit/a6a79f5e553af36a82d52fd55fdee81afad5c507))
+* sessionUser_id ([8e2a65e](https://github.com/CoCreate-app/CoCreate-logic/commit/8e2a65ee3b061568b6a3b7f31462cfea02de0ec9))
+
 ## [1.1.6](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.5...v1.1.6) (2021-08-22)
 
 
