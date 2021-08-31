@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.9...v1.2.0) (2021-08-31)
+
+
+### Features
+
+* ability to remove linkEvent listener ([b3a0f44](https://github.com/CoCreate-app/CoCreate-logic/commit/b3a0f44b9973aa187bb3d52de6dffb6c97c60fe8))
+
 ## [1.1.9](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.1.8...v1.1.9) (2021-08-27)
 
 
