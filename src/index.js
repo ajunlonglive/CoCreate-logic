@@ -1,3 +1,4 @@
+/*global CoCreate*/
 import observer from '@cocreate/observer';
 import action from '@cocreate/action';
 import passAttributes from "./passAttributes.js";
@@ -5,61 +6,61 @@ import attributes from "./attributes.js";
 import getValues from "./getValues.js";
 import passValues from "./passValues.js";
 
-
 const CoCreateLogic = {
 	passAttributes: passAttributes,
 	attributes: attributes,
 	passValues: passValues,
 	getValues: getValues,
+};
 
-	init: function() {
-		this.__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
-		this.initLinks();
-	},
+	function init() {
+		__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
+		initLinks();
+	}
 
 	// ToDo: can be depreciated do to component localStorage
-	__initPassSessionIds: function() {
+	function __initPassSessionIds() {
 		let orgId = window.localStorage.getItem('organization_id');
 		let user_id = window.localStorage.getItem('user_id');
 		let adminUI_id = window.localStorage.getItem('adminUI_id');
 		let builderUI_id = window.localStorage.getItem('builderUI_id');
 
-		this.__initPassItems(orgId, ".sessionOrg_Id", true);
-		this.__initPassItems(user_id, ".sessionUser_Id");
-		this.__initPassItems(adminUI_id, ".sessionAdminUI_Id");
-		this.__initPassItems(builderUI_id, ".sessionBuilderUI_Id");
-	},
+		__initPassItems(orgId, ".sessionOrg_Id", true);
+		__initPassItems(user_id, ".sessionUser_Id");
+		__initPassItems(adminUI_id, ".sessionAdminUI_Id");
+		__initPassItems(builderUI_id, ".sessionBuilderUI_Id");
+	}
 
 	// ToDo: can be depreciateddo to component localStorage
-	__initPassItems: function(id, selector, noFetch) {
-		const self = this;
+	function __initPassItems(id, selector, noFetch) {
+		
 		if (id) {
 			let elements = document.querySelectorAll(selector);
 			elements.forEach(el => {
-				self.passAttributes._setAttributeValue(el, 'document_id', id);
-				self.passAttributes._setAttributeValue(el, 'fetch-document_id', id);
-				self.passAttributes._setAttributeValue(el, 'filter-value', id);
+				passAttributes._setAttributeValue(el, 'document_id', id);
+				passAttributes._setAttributeValue(el, 'fetch-document_id', id);
+				passAttributes._setAttributeValue(el, 'filter-value', id);
 			});
 		}
-	},
+	}
 
 
-	initLinks: function() {
-		const self = this;
-		document.addEventListener('click', function(event) {
+	function initLinks() {
+		document.addEventListener('click', linkEvent);
+	}
+	
+	function linkEvent() {
 			const target = event.target.closest('[href], [target], [pass_to]');
 			if (!target) return;
 			if (target.hasAttribute('actions')) return;
 			if (target.closest('[actions]')) return;
-			self.runLink(target);
-		});
-	},
+			runLink(target);
+	}
 	
-	runLink: function(target) {
-		const self = this;
+	function runLink(target) {
 		if (!target) return;
 		const href = target.getAttribute('href');
-		self.passAttributes._setPassAttributes(target);			
+		passAttributes._setPassAttributes(target);			
 
 		if (target.getAttribute('target') === 'modal') {
 			event.preventDefault();
@@ -67,17 +68,17 @@ const CoCreateLogic = {
 				CoCreate.modal.open(target);
 			}
 			else if (href) {
-			self.openLink(target);
-		}
+				openLink(target);
+			}
 		}
 		else if (href) {
 			event.preventDefault();
-			self.openLink(target);
+			openLink(target);
 		}
 
-	},
+	}
 	
-	openLink: function(link) {
+	function openLink(link) {
 		var href = link.getAttribute('href');
 		var target = link.getAttribute('target');
 
@@ -90,12 +91,26 @@ const CoCreateLogic = {
 		else {
 			window.open(href, "_self");
 		}
-	},
+	}
 	
-};
+	function  disableLinks(btn) {
+		let Document = document;
+		let targetSelector = btn.getAttribute('link-target');
+		if (targetSelector) {
+			if(targetSelector.indexOf(';') !== -1) {
+				let documentSelector;
+				[documentSelector, targetSelector] = targetSelector.split(';');
+				let frame = document.querySelector(documentSelector);
+				Document = frame.contentDocument;
+			}
+		}
+		Document.removeEventListener("click", linkEvent);
+		Document.addEventListener("click", function(e){
+			e.preventDefault();
+		});
+	}
 
-
-CoCreateLogic.init();
+init();
 
 observer.init({
 	name: 'CoCreateAttributes',
@@ -132,4 +147,13 @@ action.init({
 	},
 });
 
-export default CoCreateLogic;
+action.init({
+	action: "disableLinks",
+	endEvent: "disableLinks",
+	callback: (btn, data) => {
+		disableLinks(btn);
+	}
+});
+
+
+export default {runLink};
