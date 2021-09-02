@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.2.1...v1.3.0) (2021-09-02)
+
+
+### Features
+
+* functions to disableLinks and enableLinks ([72992f4](https://github.com/CoCreate-app/CoCreate-logic/commit/72992f449493f3518d5ee06d9fc7ad9dfee5d805))
+
 ## [1.2.1](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.2.0...v1.2.1) (2021-08-31)
 
 
