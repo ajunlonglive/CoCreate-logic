@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.4...v1.3.5) (2021-09-09)
+
+
+### Bug Fixes
+
+* ci docs ([642f444](https://github.com/CoCreate-app/CoCreate-logic/commit/642f44429ec19202f05efe4d05a498bc6b9885b1))
+
 ## [1.3.4](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.3...v1.3.4) (2021-09-09)
 
 
