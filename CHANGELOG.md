@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.2...v1.3.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* CoCreate.config directory, path, name and  public ([6926d8c](https://github.com/CoCreate-app/CoCreate-logic/commit/6926d8c0736d9f18605c528a5ea4e9008a99dd10))
+
 ## [1.3.2](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.1...v1.3.2) (2021-09-08)
 
 
