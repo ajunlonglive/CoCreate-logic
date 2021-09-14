@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.8...v1.3.9) (2021-09-14)
+
+
+### Bug Fixes
+
+* add cocreate.app to domains ([6ad1e5e](https://github.com/CoCreate-app/CoCreate-logic/commit/6ad1e5e60d76e9b8b07927b1ed05efe4a5d4cbae))
+
 ## [1.3.8](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.7...v1.3.8) (2021-09-13)
 
 
