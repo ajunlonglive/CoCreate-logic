@@ -1,3 +1,10 @@
+## [1.3.10](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.9...v1.3.10) (2021-09-16)
+
+
+### Bug Fixes
+
+* update dependencies ([c69236f](https://github.com/CoCreate-app/CoCreate-logic/commit/c69236f831cdf26463fb3cd9c6a700a041b04183))
+
 ## [1.3.9](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.8...v1.3.9) (2021-09-14)
 
 
