@@ -1,3 +1,11 @@
+## [1.3.16](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.15...v1.3.16) (2021-10-05)
+
+
+### Bug Fixes
+
+* update dependencies ([3a25926](https://github.com/CoCreate-app/CoCreate-logic/commit/3a259264db1ade7813708278d0b32dadd820a846))
+* website_id in CoCreate.config ([1a279fc](https://github.com/CoCreate-app/CoCreate-logic/commit/1a279fcc5e5510b28c37cf690e030f1779b3313f))
+
 ## [1.3.15](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.14...v1.3.15) (2021-10-04)
 
 
