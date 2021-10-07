@@ -1,3 +1,10 @@
+## [1.3.18](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.17...v1.3.18) (2021-10-07)
+
+
+### Bug Fixes
+
+* prevent defualt on button elements ([9cbdf37](https://github.com/CoCreate-app/CoCreate-logic/commit/9cbdf37b9f4cd58678cacbdab8f0852d40d0c829))
+
 ## [1.3.17](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.16...v1.3.17) (2021-10-06)
 
 
