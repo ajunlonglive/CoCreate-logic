@@ -18,11 +18,13 @@ const CoCreatePassValues = {
 		let passedValues = window.localStorage.getItem('passedValues');
 		passedValues = JSON.parse(passedValues );
 		if (!passedValues || passedValues.length == 0) return;
-	        let found = passedValues.find(everyItem => everyItem.pass_value_to == pass_value_id)
-			if (['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName)) 
-				element.value = found.value;
-			else 
-				element.innerHTML = found.value;
+        let found = passedValues.find(everyItem => everyItem.pass_value_to == pass_value_id);
+		if (['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName)) {
+			element.value = found.value;
+			element.dispatchEvent(new Event('change'));
+		}
+		else 
+			element.innerHTML = found.value;
 		},
 
 	passValueAction: function(btn) {
