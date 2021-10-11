@@ -1,3 +1,10 @@
+## [1.3.19](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.18...v1.3.19) (2021-10-11)
+
+
+### Bug Fixes
+
+* after setting value in input dispatch change event ([dd91292](https://github.com/CoCreate-app/CoCreate-logic/commit/dd91292df3d37bbaf3a9c67f864faabed4dca63b))
+
 ## [1.3.18](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.17...v1.3.18) (2021-10-07)
 
 
