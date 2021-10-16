@@ -1,3 +1,10 @@
+## [1.3.25](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.24...v1.3.25) (2021-10-16)
+
+
+### Bug Fixes
+
+* update socket package to fix bug in docs ([fb3feb7](https://github.com/CoCreate-app/CoCreate-logic/commit/fb3feb7f1899eabb787dccf179683691b71833a9))
+
 ## [1.3.24](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.23...v1.3.24) (2021-10-15)
 
 
