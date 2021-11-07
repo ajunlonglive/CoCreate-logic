@@ -1,3 +1,10 @@
+## [1.3.33](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.32...v1.3.33) (2021-11-07)
+
+
+### Bug Fixes
+
+* add init() directly above export default to fix bug in firefox ([948e5ac](https://github.com/CoCreate-app/CoCreate-logic/commit/948e5ac52cdd29a6a39b00c1b2c499d8ee83cda3))
+
 ## [1.3.32](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.31...v1.3.32) (2021-11-06)
 
 
