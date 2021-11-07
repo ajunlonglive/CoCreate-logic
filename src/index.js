@@ -133,10 +133,6 @@ function preventDefault(e) {
 	e.preventDefault();
 }
 
-	
-
-init();
-
 observer.init({
 	name: 'CoCreateAttributes',
 	observe: ['addedNodes'],
@@ -188,5 +184,6 @@ action.init({
 	}
 });
 
+init();
 
 export default {runLink};
