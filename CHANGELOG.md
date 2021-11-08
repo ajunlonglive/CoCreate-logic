@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.33...v1.4.0) (2021-11-08)
+
+
+### Features
+
+* get-value now support inserting value in attribute filter-value ([373440a](https://github.com/CoCreate-app/CoCreate-logic/commit/373440ac384cc2e7c4d6f66fe53ab111aef4c7a0))
+
 ## [1.3.33](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.3.32...v1.3.33) (2021-11-07)
 
 
