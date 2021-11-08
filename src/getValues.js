@@ -48,16 +48,21 @@ const CoCreateGetValues = {
 
 	},
 	
-	setValue: function(valueEl,element){
+	setValue: function(valueEl, element){
 		if (valueEl.value) { 
 			if (['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName))
 				element.value = valueEl.value;
+			else if (element.hasAttribute('filter-value'))
+				element.setAttribute('filter-value', valueEl.value);
 			else
-				element.innerText = valueEl.value;
+				element.innerHTML = valueEl.value;
 		}
-		else
-			element.innerHTML = valueEl.innerHTML;
-	
+		else {
+			if (element.hasAttribute('filter-value'))
+				element.setAttribute('filter-value', valueEl.innerHTML);
+			else
+				element.innerHTML = valueEl.innerHTML;
+		}
 	},
 
 }
