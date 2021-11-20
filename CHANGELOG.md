@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.7...v1.4.8) (2021-11-20)
+
+
+### Bug Fixes
+
+* remove cdn.CoCreate.min.css ([09f0e56](https://github.com/CoCreate-app/CoCreate-logic/commit/09f0e5615d10412933cc4ed418492c2b4b74d78d))
+
 ## [1.4.7](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.6...v1.4.7) (2021-11-20)
 
 
