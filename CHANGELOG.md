@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.6...v1.4.7) (2021-11-20)
+
+
+### Bug Fixes
+
+* updated script tags and link tags ([93e66eb](https://github.com/CoCreate-app/CoCreate-logic/commit/93e66eb34f7b5abedfeaa6250600dccb271e064f))
+
 ## [1.4.6](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.5...v1.4.6) (2021-11-20)
 
 
