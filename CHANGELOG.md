@@ -1,3 +1,10 @@
+## [1.4.9](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.8...v1.4.9) (2021-11-21)
+
+
+### Bug Fixes
+
+* get-value reloacted to @cocreate/elements ([73125c7](https://github.com/CoCreate-app/CoCreate-logic/commit/73125c7834963dfe8f9eff32e0dd0d9e21f609c2))
+
 ## [1.4.8](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.7...v1.4.8) (2021-11-20)
 
 
