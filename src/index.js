@@ -3,14 +3,12 @@ import observer from '@cocreate/observer';
 import action from '@cocreate/action';
 import passAttributes from "./passAttributes.js";
 import attributes from "./attributes.js";
-import getValues from "./getValues.js";
 import passValues from "./passValues.js";
 
 const CoCreateLogic = {
 	passAttributes: passAttributes,
 	attributes: attributes,
 	passValues: passValues,
-	getValues: getValues,
 };
 
 const islink = new Map();
@@ -148,15 +146,6 @@ observer.init({
 	target: '[pass_id]',
 	callback: function(mutation) {
 		CoCreateLogic.passAttributes.initElement(mutation.target);
-	}
-});
-
-observer.init({
-	name: 'CoCreateLogic',
-	observe: ['addedNodes'],
-	target: '[get-value]',
-	callback: function(mutation) {
-		CoCreateLogic.getValues.initElement(mutation.target);
 	}
 });
 
