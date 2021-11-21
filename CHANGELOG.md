@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.9...v1.4.10) (2021-11-21)
+
+
+### Bug Fixes
+
+* removed @cocreate/elements ([c25202b](https://github.com/CoCreate-app/CoCreate-logic/commit/c25202bc4dd999ef46749dfeb0e04e575fa238b8))
+
 ## [1.4.9](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.8...v1.4.9) (2021-11-21)
 
 
