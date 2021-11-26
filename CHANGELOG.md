@@ -1,3 +1,11 @@
+## [1.4.13](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.12...v1.4.13) (2021-11-26)
+
+
+### Bug Fixes
+
+* docs sidenav width ([fa18195](https://github.com/CoCreate-app/CoCreate-logic/commit/fa18195f11f323bb3ac3d0b4825799249024cd72))
+* updated action dependency to actions ([098bb69](https://github.com/CoCreate-app/CoCreate-logic/commit/098bb69695616a40130c70d796a204f177af9573))
+
 ## [1.4.12](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.11...v1.4.12) (2021-11-26)
 
 
