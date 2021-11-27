@@ -1,3 +1,11 @@
+## [1.4.16](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.15...v1.4.16) (2021-11-27)
+
+
+### Bug Fixes
+
+* actions import typo ([019be03](https://github.com/CoCreate-app/CoCreate-logic/commit/019be03b0b99e06ae83b1639293d8e627d388714))
+* update dependencies ([b4478aa](https://github.com/CoCreate-app/CoCreate-logic/commit/b4478aa4597310a6a49df9bd00cec7a317f01c80))
+
 ## [1.4.15](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.14...v1.4.15) (2021-11-27)
 
 
