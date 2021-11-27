@@ -1,6 +1,6 @@
 /*global CoCreate*/
 import observer from '@cocreate/observer';
-import action from '@cocreate/action';
+import action from '@cocreate/actions';
 import passAttributes from "./passAttributes.js";
 import attributes from "./attributes.js";
 import passValues from "./passValues.js";
