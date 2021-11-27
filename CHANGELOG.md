@@ -1,3 +1,10 @@
+## [1.4.14](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.13...v1.4.14) (2021-11-27)
+
+
+### Bug Fixes
+
+* update docs api and cocreateJS script ([a5afeb9](https://github.com/CoCreate-app/CoCreate-logic/commit/a5afeb925a689b2973a3e44cfa44831401acbf92))
+
 ## [1.4.13](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.12...v1.4.13) (2021-11-26)
 
 
