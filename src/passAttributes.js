@@ -57,6 +57,7 @@ const CoCreatePassAttributes = {
 			this._setAttributeValue(el, 'name', name, isRefresh);
 			this._setAttributeValue(el, 'fetch-name', name, isRefresh);
 			this._setAttributeValue(el, 'pass-name', name, isRefresh);
+			this._setAttributeValue(el, 'pass-fetch_name', name, isRefresh);
 		}
 
 		if (value) {
