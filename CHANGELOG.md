@@ -1,3 +1,10 @@
+## [1.4.17](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.16...v1.4.17) (2021-11-28)
+
+
+### Bug Fixes
+
+* pass-fetch_name ([731bb2b](https://github.com/CoCreate-app/CoCreate-logic/commit/731bb2b0d9df5c5532e7b2606a1c0b579a848197))
+
 ## [1.4.16](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.15...v1.4.16) (2021-11-27)
 
 
