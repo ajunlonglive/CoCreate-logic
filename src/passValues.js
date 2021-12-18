@@ -2,12 +2,12 @@ const CoCreatePassValues = {
 
 	init: function() {
 		var elements = document.querySelectorAll('[pass-value_id]');
-		this.initElements(elements)
+		this.initElements(elements);
 	},
 
 	initElements: function(elements) {
 		for (let element of elements)
-			this.initElement(element)
+			this.initElement(element);
 	},
 
 	initElement: function(element) {
@@ -25,10 +25,10 @@ const CoCreatePassValues = {
 		}
 		else 
 			element.innerHTML = found.value;
-		},
+	},
 
 	passValueAction: function(btn) {
-		let form = btn.closest('form')
+		let form = btn.closest('form');
 		if (!form) return;
 
 		let elements = form.querySelectorAll('[pass-value_to]');
@@ -50,9 +50,9 @@ const CoCreatePassValues = {
 				passedValues.push({
 					pass_value_to: pass_value_to,
 					value: value
-				})
+				});
 			}
-		})
+		});
 
 		if (passedValues.length > 0) {
 			window.localStorage.setItem('passedValues', JSON.stringify(passedValues));

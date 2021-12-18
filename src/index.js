@@ -11,7 +11,7 @@ const CoCreateLogic = {
 	passValues: passValues,
 };
 
-const islink = new Map();
+// const islink = new Map();
 
 function init() {
 	__initPassSessionIds(); // will be derprciated for CoCreate-localStorage
