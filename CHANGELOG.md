@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.19...v1.5.0) (2021-12-18)
+
+
+### Features
+
+* pass-* any attribute ([774d092](https://github.com/CoCreate-app/CoCreate-logic/commit/774d092988b68f25bb6de8f04d77dc2365294f12))
+
 ## [1.4.19](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.18...v1.4.19) (2021-12-15)
 
 
