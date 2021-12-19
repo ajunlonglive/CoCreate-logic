@@ -45,19 +45,19 @@ const CoCreatePassAttributes = {
 
 	_setAttributeValue: function(element, attrname, value, isRefresh) {
 		if (value) {
-			if (attrname == 'value') {
-				if (['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName)) {
-					element.value = value;
-				// element.setAttribute(attrname, value);
-				}
-				else {
-					element.innerHTML = value;
-				}
-			}
-			else if (element.hasAttribute(attrname)) {
+			// if (attrname == 'value') {
+			// 	if (['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName)) {
+			// 		element.value = value;
+			// 	// element.setAttribute(attrname, value);
+			// 	}
+			// 	else {
+			// 		element.innerHTML = value;
+			// 	}
+			// }
+			// else if (element.hasAttribute(attrname)) {
 				if (!element.getAttribute(attrname) || isRefresh)
 					element.setAttribute(attrname, value);
-			}
+			// }
 		}
 	},
 
