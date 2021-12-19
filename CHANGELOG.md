@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.5.0...v1.5.1) (2021-12-19)
+
+
+### Bug Fixes
+
+* comment seting value in passAttributes ([0f15454](https://github.com/CoCreate-app/CoCreate-logic/commit/0f154547013b4425ae9a76c7433e3ad2ea164eaa))
+
 # [1.5.0](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.4.19...v1.5.0) (2021-12-18)
 
 
