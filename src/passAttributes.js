@@ -54,10 +54,10 @@ const CoCreatePassAttributes = {
 			// 		element.innerHTML = value;
 			// 	}
 			// }
-			// else if (element.hasAttribute(attrname)) {
+			if (element.hasAttribute(attrname)) {
 				if (!element.getAttribute(attrname) || isRefresh)
 					element.setAttribute(attrname, value);
-			// }
+			}
 		}
 	},
 
