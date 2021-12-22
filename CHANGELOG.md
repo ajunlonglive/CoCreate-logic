@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.5.3...v1.5.4) (2021-12-22)
+
+
+### Bug Fixes
+
+* do not remove item from local storage ([5986525](https://github.com/CoCreate-app/CoCreate-logic/commit/5986525f12c7a9ace990698e00e30491d5916b03))
+
 ## [1.5.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.5.2...v1.5.3) (2021-12-22)
 
 
