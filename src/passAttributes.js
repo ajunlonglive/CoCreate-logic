@@ -20,7 +20,6 @@ const CoCreatePassAttributes = {
 		
 		let attrValues = passedAttributes[`'${pass_id}'`];
 		if (!attrValues) return;
-		window.localStorage.removeItem('passedAttributes')
 		this._setAttributeValues(element, attrValues);
 	},
 
