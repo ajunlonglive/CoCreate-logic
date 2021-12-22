@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.5.2...v1.5.3) (2021-12-22)
+
+
+### Bug Fixes
+
+* remove passedAttributes from localstorage after get ([6bb7f6a](https://github.com/CoCreate-app/CoCreate-logic/commit/6bb7f6a2e0b917efb8157707b777d37e4a2cba6d))
+
 ## [1.5.2](https://github.com/CoCreate-app/CoCreate-logic/compare/v1.5.1...v1.5.2) (2021-12-20)
 
 
